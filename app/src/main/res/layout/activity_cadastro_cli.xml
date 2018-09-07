@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CadastroCli">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="@dimen/nav_header_vertical_spacing">
+
+        <TextView
+            android:id="@+id/lblTexto"
+            android:layout_width="319dp"
+            android:layout_height="wrap_content"
+            android:text="Insira os valores abaixo para se cadastrar" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/editText3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorText"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorText" />
+
+        <EditText
+            android:id="@+id/editText4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorText"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorText" />
+
+        <EditText
+            android:id="@+id/editText5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorText"
+            android:ems="10"
+            android:hint="Username"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorText" />
+
+        <EditText
+            android:id="@+id/editText6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorText"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorText" />
+
+        <EditText
+            android:id="@+id/editText7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorText"
+            android:ems="10"
+            android:hint="Data de nascimento(dd/mm/yyyy)"
+            android:inputType="date"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorText" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Escolha seu país:" />
+
+        <Spinner
+            android:id="@+id/spnCountry"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:id="@+id/txtvLang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Escolha sua língua:" />
+
+        <Spinner
+            android:id="@+id/spnLang"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <Button
+            android:id="@+id/btnCad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:onClick="Cad"
+            android:text="Cadastrar" />
+
+    </LinearLayout>
+</ScrollView>

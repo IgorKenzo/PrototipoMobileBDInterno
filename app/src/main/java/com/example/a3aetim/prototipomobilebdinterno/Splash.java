@@ -13,7 +13,7 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        final Intent intent = new Intent(this, MainActivity.class);
+        final Intent intent = new Intent(this, LoginActivity.class);
         Thread thread = new Thread(){
             public void run(){
                 try{
