@@ -4,9 +4,17 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_Search"
-            android:title="Pesquisar" />
+            <item
+                android:id="@+id/nav_Search"
+                android:title="Pesquisar" />
+
+            <item
+                android:id="@+id/nav_SearchApp"
+                android:title="Application"/>
+            <item
+                android:id="@+id/nav_SearchDev"
+                android:title="Developer"/>
+
         <item
             android:id="@+id/nav_Market"
             android:title="Loja" />

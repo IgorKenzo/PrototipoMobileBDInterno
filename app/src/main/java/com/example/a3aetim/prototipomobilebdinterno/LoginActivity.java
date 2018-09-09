@@ -352,5 +352,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         //Intent i = new Intent(this,CadastroCli.class);
         //startActivity(i);
     }
+    public void logarPorEnquanto(View view){
+        Intent i = new Intent(this,MainActivity.class);
+        startActivity(i);
+    }
 }
 

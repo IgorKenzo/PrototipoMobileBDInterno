@@ -25,7 +25,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/edtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorText"
@@ -36,7 +36,7 @@
             android:textColorHint="@color/colorText" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/edtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorText"
@@ -47,7 +47,7 @@
             android:textColorHint="@color/colorText" />
 
         <EditText
-            android:id="@+id/editText5"
+            android:id="@+id/edtUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorText"
@@ -57,7 +57,7 @@
             android:textColorHint="@color/colorText" />
 
         <EditText
-            android:id="@+id/editText6"
+            android:id="@+id/edtPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorText"
@@ -68,7 +68,7 @@
             android:textColorHint="@color/colorText" />
 
         <EditText
-            android:id="@+id/editText7"
+            android:id="@+id/edtBirth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorText"
@@ -100,6 +100,30 @@
             android:layout_width="match_parent"
             android:layout_height="50dp" />
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Imagem" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnChoosePic"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Escolher" />
+
+            <ImageView
+                android:id="@+id/imgvArchive"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
         <Button
             android:id="@+id/btnCad"
             android:layout_width="match_parent"
@@ -107,6 +131,13 @@
             android:backgroundTint="@color/colorPrimary"
             android:onClick="Cad"
             android:text="Cadastrar" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="listar"
+            android:text="listar" />
 
     </LinearLayout>
 </ScrollView>
