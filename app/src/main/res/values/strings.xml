@@ -22,4 +22,10 @@
         completions."
     </string>
     <string name="title_activity_cadastro_cli">CadastroCli</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_Market">Hello Market</string>
+    <string name="hello_profile">Hello Prof</string>
+    <string name="hello_application">Hello App</string>
+    <string name="hello_config">Hello config</string>
 </resources>

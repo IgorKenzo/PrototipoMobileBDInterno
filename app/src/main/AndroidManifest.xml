@@ -33,7 +33,8 @@
             android:label="@string/title_activity_login" />
         <activity
             android:name=".CadastroCli"
-            android:label="@string/title_activity_cadastro_cli"></activity>
+            android:label="@string/title_activity_cadastro_cli" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

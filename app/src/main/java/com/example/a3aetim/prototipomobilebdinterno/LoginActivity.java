@@ -31,8 +31,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
+
+import es.dmoral.toasty.Toasty;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -347,8 +351,24 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         Intent i = new Intent(this,CadastroCli.class);
         startActivity(i);
     }
+
+    /*Toasty.Config.getInstance()
+    .setErrorColor(@ColorInt int errorColor) // optional
+    .setInfoColor(@ColorInt int infoColor) // optional
+    .setSuccessColor(@ColorInt int successColor) // optional
+    .setWarningColor(@ColorInt int warningColor) // optional
+    .setTextColor(@ColorInt int textColor) // optional
+    .tintIcon(boolean tintIcon) // optional (apply textColor also to the icon)
+    .setToastTypeface(@NonNull Typeface typeface) // optional
+    .setTextSize(int sizeInSp) // optional
+    .apply(); // required*/
+
+    //caso queira personalizar
+    //Toasty.custom(yourContext, "I'm a custom Toast", yourIconDrawable, tintColor, duration, withIcon,
+    //shouldTint).show();
+
     public void opanFtgPass(View view){
-        Toast.makeText(this, "Esqueci a senha", Toast.LENGTH_SHORT).show();
+        Toasty.info(this,"Nice", Toast.LENGTH_SHORT,false).show();
         //Intent i = new Intent(this,CadastroCli.class);
         //startActivity(i);
     }

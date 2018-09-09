@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -36,7 +37,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import es.dmoral.toasty.Toasty;
+
 import static android.media.MediaRecorder.VideoSource.CAMERA;
+import static android.widget.Toast.LENGTH_SHORT;
 
 public class CadastroCli extends Activity implements AdapterView.OnItemSelectedListener {
     DatabaseHelper helper;
@@ -139,20 +143,17 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
                 imageURI = data.getData();
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageURI);
-
-                    Toast.makeText(this, "Escolhida", Toast.LENGTH_SHORT).show();
                     imgvArchive.setImageBitmap(bitmap);
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Toast.makeText(this, "Failed!", Toast.LENGTH_SHORT).show();
+                    Toasty.error(this,"Too bad", Toast.LENGTH_SHORT,false).show();
                 }
             }
 
         } else if (requestCode == CAMERA) {
             bitmap = (Bitmap) data.getExtras().get("data");
             imgvArchive.setImageBitmap(bitmap);
-            Toast.makeText(this, "Escolhida", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -184,10 +185,10 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
         values.put("IdLang",langid);
         long res = db.insert("User",null,values);
         if(res != -1){
-            Toast.makeText(this, "Cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Cadastrado com sucesso!", LENGTH_SHORT).show();
         }
         else{
-            Toast.makeText(this, "Um erro ocorreu!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Um erro ocorreu!", LENGTH_SHORT).show();
         }
     }
 
