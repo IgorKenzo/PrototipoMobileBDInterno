@@ -25,6 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
                 .setBrief("I'm warmed of mobile technologies. Ideas maker, curious and nature lover.")
                 .setAppIcon(R.mipmap.ic_launcher)
                 .setAppName(R.string.app_name)
+                .setAppName("fdfdfd")
                 .addGitHubLink("user")
                 .addFacebookLink("user")
                 .addFiveStarsAction()

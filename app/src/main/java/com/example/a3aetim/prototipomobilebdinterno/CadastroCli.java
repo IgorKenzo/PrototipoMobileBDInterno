@@ -202,38 +202,4 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
         helper.close();
         super.onDestroy();
     }
-
-
-
-    public void listar(View view) {
-        SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT _IdUser, NameUser from User", null);
-        cursor.moveToFirst();
-        int id = 0;
-        String name ="";
-        String[] valores = new String[10];
-        for (int i = 0; i < cursor.getCount(); i++) {
-            id = cursor.getInt(0);
-            name = cursor.getString(1);
-            valores = new String[]{id + name};
-        }
-        AlertDialog.Builder listaUsu = new AlertDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
-        listaUsu.setTitle("usuarios");
-        listaUsu.setCancelable(true);
-        for(int i = 0 ; i < cursor.getCount() ; i++) {
-            listaUsu.setItems(valores, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch (which) {
-                        case 0:
-
-                            break;
-
-                    }
-                }
-            });
-            listaUsu.show();
-        }
-
-    }
 }

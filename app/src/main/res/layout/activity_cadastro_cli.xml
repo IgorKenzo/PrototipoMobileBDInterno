@@ -131,13 +131,5 @@
             android:backgroundTint="@color/colorPrimary"
             android:onClick="Cad"
             android:text="Cadastrar" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="listar"
-            android:text="listar" />
-
     </LinearLayout>
 </ScrollView>
