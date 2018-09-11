@@ -202,4 +202,34 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
         helper.close();
         super.onDestroy();
     }
+    public void CadProd(View view){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues values =  new ContentValues();
+
+        values.put("InfoDev","Criador de conteudo");
+        values.put("NumSoftDev","1");
+        values.put("NameDev","Vortex");
+
+        long res = db.insert("Developer",null,values);
+
+        ContentValues values2 =  new ContentValues();
+        for(int i = 0; i<10; i++) {
+            values2.put("NameApp", "Yhe escape");
+            values2.put("VersionApp", "Pré-Alpha 0.0.1");
+            values2.put("PriceApp", 133.30);
+            values2.put("PublisherNameApp", "BG");
+            values2.put("ReleaseDateApp", "08/02/2018");
+            values2.put("ArquiveApp", "arquivo.rar");
+            values2.put("IdDev", 1);
+            values2.put("TypeApp", 1);
+            values2.put("PegiApp", 2);
+            db.insert("Application",null,values2);
+        }
+        if(res != -1){
+            Toasty.success(this, "Cadastrado com sucesso!", LENGTH_SHORT,false).show();
+        }
+        else {
+            Toasty.error(this, "Um erro ocorreu!", LENGTH_SHORT,false).show();
+        }
+    }
 }

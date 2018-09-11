@@ -4,7 +4,7 @@
 
     <header
         android:fragment="com.example.a3aetim.prototipomobilebdinterno.SettingsActivity$GeneralPreferenceFragment"
-        android:icon="@drawable/ic_info_black_24dp"
+        android:icon="@drawable/ic_info_outline_white_48dp"
         android:title="@string/pref_header_general" />
 
     <header

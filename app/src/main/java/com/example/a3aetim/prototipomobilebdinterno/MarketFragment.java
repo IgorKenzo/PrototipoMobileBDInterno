@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 
 public class MarketFragment extends Fragment {
     DatabaseHelper helper;
-    private LinearLayout linearLayout = null, linearLayouth = null;
+    private LinearLayout linearLayout = null, linearLayoutUser = null,linearLayoutDev = null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -34,7 +34,8 @@ public class MarketFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         helper = new DatabaseHelper(getActivity());
         linearLayout = (LinearLayout) view.findViewById(R.id.linearLayoutMarket);
-        linearLayouth = (LinearLayout) view.findViewById(R.id.linerlayouthorizontalMarket);
+        linearLayoutUser = (LinearLayout) view.findViewById(R.id.linerlayouthorizontalMarketuser);
+        linearLayoutDev = (LinearLayout) view.findViewById(R.id.linearlayouthorizontalMarketdev);
         SQLiteDatabase db = helper.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT _IdUser, NameUser, PicUser from User", null);
         cursor.moveToFirst();
@@ -49,11 +50,44 @@ public class MarketFragment extends Fragment {
             btn.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             ImageView iv = new ImageView(getActivity());
             iv.setImageBitmap(BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length));
-            linearLayouth.addView(btn);
-            linearLayouth.addView(iv);
+            linearLayoutUser.addView(btn);
+            linearLayoutUser.addView(iv);
             cursor.moveToNext();
         }
         cursor.close();
+        Cursor cursordev = db.rawQuery("SELECT _IdDev, NameDev, InfoDev from Developer", null);
+        int iddev;
+        String namedev, infodev;
+        cursordev.moveToFirst();
+        for (int j = 0; j < cursordev.getCount(); j++) {
+            iddev = cursordev.getInt(0);
+            namedev = cursordev.getString(1);
+            infodev = cursordev.getString(2);
+            Button btn = new Button(getActivity());
+            btn.setText(iddev + namedev+infodev);
+            btn.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            linearLayoutDev.addView(btn);
+            cursordev.moveToNext();
+        }
+        cursordev.close();
+
+        Cursor cursorapp = db.rawQuery("SELECT _IdApp, NameApp, PriceApp from Application", null);
+        int idapp;
+        String nameapp;
+        double preco;
+        cursorapp.moveToFirst();
+        for (int j = 0; j < cursorapp.getCount(); j++) {
+            idapp = cursorapp.getInt(0);
+            nameapp = cursorapp.getString(1);
+            preco = cursorapp.getDouble(2);
+            Button btn = new Button(getActivity());
+            btn.setText(idapp + nameapp+preco);
+            btn.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            linearLayout.addView(btn);
+            cursorapp.moveToNext();
+        }
+        cursorapp.close();
+
     }
     @Override
     public void onDestroy(){

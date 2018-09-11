@@ -3,6 +3,7 @@
     <SwitchPreference
         android:defaultValue="true"
         android:key="example_switch"
+        android:textColor="@color/colorText"
         android:summary="@string/pref_description_social_recommendations"
         android:title="@string/pref_title_social_recommendations" />
 
@@ -14,6 +15,7 @@
         android:inputType="textCapWords"
         android:key="example_text"
         android:maxLines="1"
+        android:textColor="@color/colorText"
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:title="@string/pref_title_display_name" />
@@ -26,6 +28,7 @@
         android:entries="@array/pref_example_list_titles"
         android:entryValues="@array/pref_example_list_values"
         android:key="example_list"
+        android:textColor="@color/colorText"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
         android:title="@string/pref_title_add_friends_to_messages" />

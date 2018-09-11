@@ -39,12 +39,12 @@ public class MainActivity extends AppCompatActivity
         headerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             // // Pega o FragmentManager
-             // FragmentManager fm = getSupportFragmentManager();
-             // // Abre uma transação e adiciona
-             // FragmentTransaction ft = fm.beginTransaction();
-             // ft.replace(R.id.frameContentMain, new ProfileFragment());
-             // ft.commit();
+           //   // Pega o FragmentManager
+           //   FragmentManager fm = getSupportFragmentManager();
+           //   // Abre uma transação e adiciona
+           //   FragmentTransaction ft = fm.beginTransaction();
+           //   ft.replace(R.id.frameContentMain, new ProfileFragment());
+           //   ft.commit();
                 openProf();
             }
         });
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_Discussions) {
 
         } else if (id == R.id.nav_Confing) {
-            Intent intent = new Intent(this,ProfileActivity.class);
+            Intent intent = new Intent(this,SettingsActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_RateUs) {
