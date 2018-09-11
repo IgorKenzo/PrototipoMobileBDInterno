@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 
 public class MarketFragment extends Fragment {
     DatabaseHelper helper;
-    private LinearLayout linearLayout = null;
+    private LinearLayout linearLayout = null, linearLayouth = null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -34,6 +34,7 @@ public class MarketFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         helper = new DatabaseHelper(getActivity());
         linearLayout = (LinearLayout) view.findViewById(R.id.linearLayoutMarket);
+        linearLayouth = (LinearLayout) view.findViewById(R.id.linerlayouthorizontalMarket);
         SQLiteDatabase db = helper.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT _IdUser, NameUser, PicUser from User", null);
         cursor.moveToFirst();
@@ -48,8 +49,8 @@ public class MarketFragment extends Fragment {
             btn.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             ImageView iv = new ImageView(getActivity());
             iv.setImageBitmap(BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length));
-            linearLayout.addView(btn);
-            linearLayout.addView(iv);
+            linearLayouth.addView(btn);
+            linearLayouth.addView(iv);
             cursor.moveToNext();
         }
         cursor.close();

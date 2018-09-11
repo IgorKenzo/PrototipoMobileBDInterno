@@ -115,6 +115,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_Discussions) {
 
         } else if (id == R.id.nav_Confing) {
+            Intent intent = new Intent(this,ProfileActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_RateUs) {
 

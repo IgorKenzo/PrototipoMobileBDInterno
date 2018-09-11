@@ -12,12 +12,6 @@
     tools:context=".LoginActivity">
 
     <!-- Login progress -->
-    <TextView
-        android:id="@+id/txtvTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:textSize="24sp" />
 
     <ProgressBar
         android:id="@+id/login_progress"
@@ -30,7 +24,8 @@
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingTop="18dp">
 
         <LinearLayout
             android:id="@+id/email_login_form"

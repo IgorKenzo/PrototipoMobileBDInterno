@@ -185,10 +185,10 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
         values.put("IdLang",langid);
         long res = db.insert("User",null,values);
         if(res != -1){
-            Toast.makeText(this, "Cadastrado com sucesso!", LENGTH_SHORT).show();
+            Toasty.success(this, "Cadastrado com sucesso!", LENGTH_SHORT,false).show();
         }
-        else{
-            Toast.makeText(this, "Um erro ocorreu!", LENGTH_SHORT).show();
+        else {
+            Toasty.error(this, "Um erro ocorreu!", LENGTH_SHORT,false).show();
         }
     }
 

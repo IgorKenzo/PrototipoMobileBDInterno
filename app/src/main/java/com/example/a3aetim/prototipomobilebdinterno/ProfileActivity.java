@@ -2,6 +2,7 @@ package com.example.a3aetim.prototipomobilebdinterno;
 
 import android.app.ActionBar;
 import android.graphics.Color;
+import android.preference.PreferenceActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.style.BackgroundColorSpan;
