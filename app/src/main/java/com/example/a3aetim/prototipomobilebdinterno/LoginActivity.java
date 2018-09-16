@@ -100,6 +100,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mProgressView = findViewById(R.id.login_progress);
     }
 
+    public void trocar(){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
             return;
@@ -163,6 +168,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
+        }
+        //Define a senha como campo obrigatório
+        if(TextUtils.isEmpty(password)){
+            mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
             cancel = true;
         }
@@ -334,7 +345,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(false);
 
             if (success) {
-                finish();
+                trocar();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
@@ -368,7 +379,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     //shouldTint).show();
 
     public void opanFtgPass(View view){
-        Toasty.info(this,"Nice", Toast.LENGTH_SHORT,false).show();
+        Toasty.info(this,"Em desenvolvimento", Toast.LENGTH_SHORT,true).show();
         //Intent i = new Intent(this,CadastroCli.class);
         //startActivity(i);
     }

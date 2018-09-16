@@ -10,7 +10,7 @@
 
             <item
                 android:id="@+id/nav_SearchApp"
-                android:title="Application"/>
+                android:title="Aplicações"/>
             <item
                 android:id="@+id/nav_SearchDev"
                 android:title="Developer"/>
