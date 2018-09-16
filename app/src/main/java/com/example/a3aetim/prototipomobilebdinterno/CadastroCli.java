@@ -78,14 +78,14 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
         txtBirth = (EditText)findViewById(R.id.edtBirth);
         crtdata = new Date();
         imgvArchive = (ImageView)findViewById(R.id.imgvArchive);
-        List<String> paises = new ArrayList<>(Arrays.asList("Brazil","United States","Canada"));
+        List<String> paises = new ArrayList<>(Arrays.asList("Brasil","Estados Unidos","Canadá"));
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, paises );
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         country.setAdapter(dataAdapter);
 
-        List<String> linguagens = new ArrayList<>(Arrays.asList("Portuguese","English"));
+        List<String> linguagens = new ArrayList<>(Arrays.asList("Português","Inglês"));
 
         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, linguagens );
@@ -96,8 +96,8 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this,AlertDialog.THEME_DEVICE_DEFAULT_DARK);
         pictureDialog.setTitle("Selecione");
         String[] pictureDialogItems = {
-                "Select photo from gallery",
-                "Capture photo from camera" };
+                "Selecione uma foto da galeria",
+                "Tire uma foto pela câmera" };
         pictureDialog.setItems(pictureDialogItems,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -120,6 +120,7 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
 
         startActivityForResult(galleryIntent, PICK_IMAGE);
     }
+
     private void takePhotoFromCamera() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_DENIED){
@@ -227,6 +228,8 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
         }
         if(res != -1){
             Toasty.success(this, "Cadastrado com sucesso!", LENGTH_SHORT,false).show();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         }
         else {
             Toasty.error(this, "Um erro ocorreu!", LENGTH_SHORT,false).show();

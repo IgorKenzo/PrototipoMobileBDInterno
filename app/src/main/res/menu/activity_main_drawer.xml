@@ -5,33 +5,33 @@
 
     <group android:checkableBehavior="single">
         <item
-        android:id="@+id/nav_Search"
-        android:title="Pesquisar"/>
+            android:id="@+id/nav_Search"
+            android:title="@string/activity_title_item_search" />
         <item
             android:id="@+id/nav_SearchApp"
-            android:title="Aplicações"/>
+            android:title="@string/activity_title_item_listApps"/>
         <item
             android:id="@+id/nav_SearchDev"
-            android:title="Developer"/>
+            android:title="@string/activity_title_item_listDevs" />
         <item
             android:id="@+id/nav_Market"
-            android:title="Loja" />
+            android:title="@string/activity_title_item_store" />
         <item
             android:id="@+id/nav_Avaliation"
-            android:title="Avaliações" />
+            android:title="@string/activity_title_item_avaliations" />
         <item
             android:id="@+id/nav_Discussions"
-            android:title="Discussões"/>
+            android:title="@string/activity_title_item_discussions"/>
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_Confing"
-                android:title="Configurações" />
+                android:id="@+id/nav_Config"
+                android:title="@string/activity_title_item_configurations" />
             <item
                 android:id="@+id/nav_RateUs"
-                android:title="Avalie-nos" />
+                android:title="@string/activity_title_item_rateus" />
         </menu>
     </item>
 

@@ -1,5 +1,6 @@
 package com.example.a3aetim.prototipomobilebdinterno;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
@@ -47,6 +48,13 @@ public class MarketFragment extends Fragment {
             byte[] imgByte = cursor.getBlob(2);
             Button btn = new Button(getActivity());
             btn.setText(id + name);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), ProfileActivity.class);
+                    startActivity(intent);
+                }
+            });
             btn.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             ImageView iv = new ImageView(getActivity());
             iv.setImageBitmap(BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length));
@@ -64,7 +72,7 @@ public class MarketFragment extends Fragment {
             namedev = cursordev.getString(1);
             infodev = cursordev.getString(2);
             Button btn = new Button(getActivity());
-            btn.setText(iddev + namedev+infodev);
+            btn.setText(iddev + " " + namedev + " " + infodev);
             btn.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             linearLayoutDev.addView(btn);
             cursordev.moveToNext();
@@ -94,4 +102,5 @@ public class MarketFragment extends Fragment {
         helper.close();
         super.onDestroy();
     }
+
 }
