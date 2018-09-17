@@ -178,7 +178,7 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
         values.put("PassUser",String.valueOf(txtPass.getText()));
         values.put("NameUser",String.valueOf(txtName.getText()));
         values.put("BirthUser",String.valueOf(txtBirth.getText()));
-        values.put("EmailUser",String.valueOf(txtBirth.getText()));
+        values.put("EmailUser",String.valueOf(txtEmail.getText()));
         values.put("PicUser",img);
         values.put("CountryUser",countryid);
         values.put("TypeUser",0);

@@ -25,60 +25,65 @@
             android:id="@+id/edtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium_cad"
             android:backgroundTint="@color/colorText"
             android:ems="10"
             android:hint="@string/activity_hint_etname"
             android:inputType="textPersonName"
+            android:singleLine="true"
             android:textColor="@color/colorText"
-            android:textColorHint="@color/colorText"
-            android:layout_marginTop="@dimen/spacing_medium_cad"/>
+            android:textColorHint="@color/colorText" />
 
         <EditText
             android:id="@+id/edtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium_cad"
             android:backgroundTint="@color/colorText"
             android:ems="10"
             android:hint="@string/activity_hint_etemail"
             android:inputType="textEmailAddress"
+            android:singleLine="true"
             android:textColor="@color/colorText"
-            android:textColorHint="@color/colorText"
-            android:layout_marginTop="@dimen/spacing_medium_cad"/>
+            android:textColorHint="@color/colorText" />
 
         <EditText
             android:id="@+id/edtUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium_cad"
             android:backgroundTint="@color/colorText"
             android:ems="10"
             android:hint="@string/activity_hint_etusername"
+            android:singleLine="true"
             android:textColor="@color/colorText"
-            android:textColorHint="@color/colorText"
-            android:layout_marginTop="@dimen/spacing_medium_cad"/>
+            android:textColorHint="@color/colorText" />
 
         <EditText
             android:id="@+id/edtPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium_cad"
             android:backgroundTint="@color/colorText"
             android:ems="10"
             android:hint="@string/activity_hint_etsenha"
             android:inputType="textPassword"
+            android:singleLine="true"
             android:textColor="@color/colorText"
-            android:textColorHint="@color/colorText"
-            android:layout_marginTop="@dimen/spacing_medium_cad"/>
+            android:textColorHint="@color/colorText" />
 
         <EditText
             android:id="@+id/edtBirth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium_cad"
             android:backgroundTint="@color/colorText"
             android:ems="10"
             android:hint="@string/activity_hint_etdata"
             android:inputType="date"
+            android:singleLine="true"
             android:textColor="@color/colorText"
-            android:textColorHint="@color/colorText"
-            android:layout_marginTop="@dimen/spacing_medium_cad"/>
+            android:textColorHint="@color/colorText" />
 
         <TextView
             android:id="@+id/textView14"

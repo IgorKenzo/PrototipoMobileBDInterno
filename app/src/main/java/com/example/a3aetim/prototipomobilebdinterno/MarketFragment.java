@@ -38,7 +38,7 @@ public class MarketFragment extends Fragment {
             linearLayoutUser = (LinearLayout) view.findViewById(R.id.linerlayouthorizontalMarketuser);
             linearLayoutDev = (LinearLayout) view.findViewById(R.id.linearlayouthorizontalMarketdev);
             SQLiteDatabase db = helper.getReadableDatabase();
-            Cursor cursor = db.rawQuery("SELECT _IdUser, NameUser, PicUser from User", null);
+            Cursor cursor = db.rawQuery("SELECT _IdUser, NameUser, PicUser, EmailUser, PassUser from User", null);
             int id = 0;
             String name = "";
             cursor.moveToFirst();
@@ -46,8 +46,10 @@ public class MarketFragment extends Fragment {
                 id = cursor.getInt(0);
                 name = cursor.getString(1);
                 byte[] imgByte = cursor.getBlob(2);
+                String email = cursor.getString(3);
+                String senha = cursor.getString(4);
                 Button btn = new Button(getActivity());
-                btn.setText(id + name);
+                btn.setText(id + name+email+senha);
                 btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

@@ -12,7 +12,7 @@
     <string name="activity_title_item_rateus">Avalie-nos</string>
 
     <string name="activity_hint_etname">Nome</string>
-    <string name="activity_hint_etsenha">Senha</string>
+    <string name="activity_hint_etsenha">Senha (Mínimo 4 caracteres)</string>
     <string name="activity_hint_etdata">Data de nascimento (dd/mm/yyyy)</string>
     <string name="activity_hint_etemail">E-mail</string>
     <string name="activity_hint_etusername">Nome de usuário</string>

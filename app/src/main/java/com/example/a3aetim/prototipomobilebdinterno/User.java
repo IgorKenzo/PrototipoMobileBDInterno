@@ -1,18 +1,18 @@
 package com.example.a3aetim.prototipomobilebdinterno;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class User {
+public class User implements Serializable {
     private int _IdUser;
     private String LoginUser;
     private String PassUser;
     private String NameUser;
-    private Date BirthUser;
+    private String BirthUser;
     private String EmailUser;
-    private Byte[] PicUser;
+    private byte[] PicUser;
     private int CountryUser;
     private int TypeUser;
-    private Date CrtDateUser;
+    private String CrtDateUser;
     private int IdLang;
     private int IdDev;
 
@@ -30,18 +30,30 @@ public class User {
         this.PicUser=null;
         this.TypeUser=0;
     }
-    User(int id, String birth, int country, String crt, String email, int iddev, int idlang, String username, String name, String password, byte[] pic, int type){
-        this._IdUser = _IdUser;
+    User(int id, String birthUser, int countryUser, String crtDateUser, String emailUser, int iddev, int idlang, String loginUser, String nameUser, String passUser, byte[] picUser, int typeUser){
+        this._IdUser = id;
         this.BirthUser = birthUser;
         this.CountryUser = countryUser;
         this.CrtDateUser = crtDateUser;
         this.EmailUser = emailUser;
-        this.IdDev = idDev;
-        this.IdLang = idLang;
+        this.IdDev = iddev;
+        this.IdLang = idlang;
         this.LoginUser = loginUser;
         this.NameUser = nameUser;
         this.PassUser = passUser;
         this.PicUser = picUser;
         this.TypeUser = typeUser;
+    }
+
+    public byte[] getPicUser() {
+        return PicUser;
+    }
+
+    public String getNameUser() {
+        return NameUser;
+    }
+
+    public String getEmailUser() {
+        return EmailUser;
     }
 }

@@ -101,27 +101,28 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
-
+/*User(_IdUser INTEGER PRIMARY KEY AUTOINCREMENT, LoginUser TEXT UNIQUE, PassUser TEXT, NameUser TEXT, " +
+                   "BirthUser DATE, EmailUser TEXT, PicUser BLOB, CountryUser INTEGER, TypeUser TINYINT, CrtDateUser DATE, IdLang INTEGER, IdDev INTEGER REFERENCES Developer(_IdDev));");*/
     public void trocar(){
         DatabaseHelper helper = new DatabaseHelper(this);
         SQLiteDatabase db = helper.getReadableDatabase();
-        String query = "SELECT * FROM User WHERE EmailUser =" + chkEmail+ "AND "+chkPass;
+        String query = "SELECT * FROM User WHERE EmailUser =" + " '"+chkEmail+"'" + "AND" +" '"+ chkPass+"'";
         Cursor cursor = db.rawQuery(query,null);
         cursor.moveToFirst();
         User usuario = new User();
         for(int i = 0; i < cursor.getCount(); i++){
             int id = cursor.getInt(0);
-            String birth = cursor.getString(1);
-            int country = cursor.getInt(2);
-            String crt = cursor.getString(3);
-            String email = cursor.getString(4);
-            int iddev = cursor.getInt(5);
-            int idlang = cursor.getInt(6);
-            String username = cursor.getString(7);
-            String name = cursor.getString(8);
-            String password = cursor.getString(9);
-            byte[] pic = cursor.getBlob(10);
-            int type = cursor.getInt(11);
+            String username = cursor.getString(1);
+            String password = cursor.getString(2);
+            String name = cursor.getString(3);
+            String birth = cursor.getString(4);
+            String email = cursor.getString(5);
+            byte[] pic = cursor.getBlob(6);
+            int country = cursor.getInt(7);
+            int type = cursor.getInt(8);
+            String crt = cursor.getString(9);
+            int idlang = cursor.getInt(10);
+            int iddev = cursor.getInt(11);
             usuario = new User(id,birth,country,crt,email,iddev,idlang,username,name,password,pic,type);
         }
         Intent i = new Intent(this, MainActivity.class);
@@ -190,7 +191,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password)) {
+        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -230,7 +231,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         //TODO: Replace this with your own logic
         DatabaseHelper helper = new DatabaseHelper(this);
         SQLiteDatabase db = helper.getReadableDatabase();
-        String query = "SELECT * FROM User WHERE EmailUser = "+email;
+        String query = "SELECT * FROM User WHERE EmailUser = "+" '"+email+"'";
         Cursor cursor = db.rawQuery(query,null);
         if(cursor.getCount()==1){
             chkEmail = email;
@@ -238,6 +239,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             return true;
         }
         else{helper.close();return false;}
+    }
+    private boolean isPasswordValid(String password) {
+        //TODO: Replace this with your own logic
+        return password.length() > 4;
     }
 
 
