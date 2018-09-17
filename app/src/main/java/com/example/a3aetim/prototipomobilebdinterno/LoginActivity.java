@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
 import android.app.Activity;
@@ -34,6 +35,7 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
@@ -67,7 +69,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-
+    private String chkEmail,chkPass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +103,29 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     public void trocar(){
+        DatabaseHelper helper = new DatabaseHelper(this);
+        SQLiteDatabase db = helper.getReadableDatabase();
+        String query = "SELECT * FROM User WHERE EmailUser =" + chkEmail+ "AND "+chkPass;
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        User usuario = new User();
+        for(int i = 0; i < cursor.getCount(); i++){
+            int id = cursor.getInt(0);
+            String birth = cursor.getString(1);
+            int country = cursor.getInt(2);
+            String crt = cursor.getString(3);
+            String email = cursor.getString(4);
+            int iddev = cursor.getInt(5);
+            int idlang = cursor.getInt(6);
+            String username = cursor.getString(7);
+            String name = cursor.getString(8);
+            String password = cursor.getString(9);
+            byte[] pic = cursor.getBlob(10);
+            int type = cursor.getInt(11);
+            usuario = new User(id,birth,country,crt,email,iddev,idlang,username,name,password,pic,type);
+        }
         Intent i = new Intent(this, MainActivity.class);
+        i.putExtra("LoggedUser",usuario);
         startActivity(i);
     }
 
@@ -161,12 +185,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
-
+        chkPass = password;
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (!TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -204,13 +228,18 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        DatabaseHelper helper = new DatabaseHelper(this);
+        SQLiteDatabase db = helper.getReadableDatabase();
+        String query = "SELECT * FROM User WHERE EmailUser = "+email;
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor.getCount()==1){
+            chkEmail = email;
+            helper.close();
+            return true;
+        }
+        else{helper.close();return false;}
     }
 
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
-    }
 
     /**
      * Shows the progress UI and hides the login form.

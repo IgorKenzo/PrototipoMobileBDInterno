@@ -124,11 +124,11 @@
             android:onClick="Cad"
             android:text="Cadastrar" />
 
-       <!-- <Button
+        <Button
             android:id="@+id/btnCadProd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="CadProd"
-            android:text="Inserir produtos" />-->
+            android:text="Inserir produtos" />
     </LinearLayout>
 </ScrollView>
