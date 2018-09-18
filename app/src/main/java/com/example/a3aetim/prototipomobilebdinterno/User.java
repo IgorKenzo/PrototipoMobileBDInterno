@@ -45,6 +45,42 @@ public class User implements Serializable {
         this.TypeUser = typeUser;
     }
 
+    public int get_IdUser() {
+        return _IdUser;
+    }
+
+    public int getCountryUser() {
+        return CountryUser;
+    }
+
+    public int getIdDev() {
+        return IdDev;
+    }
+
+    public int getIdLang() {
+        return IdLang;
+    }
+
+    public int getTypeUser() {
+        return TypeUser;
+    }
+
+    public String getBirthUser() {
+        return BirthUser;
+    }
+
+    public String getCrtDateUser() {
+        return CrtDateUser;
+    }
+
+    public String getLoginUser() {
+        return LoginUser;
+    }
+
+    public String getPassUser() {
+        return PassUser;
+    }
+
     public byte[] getPicUser() {
         return PicUser;
     }

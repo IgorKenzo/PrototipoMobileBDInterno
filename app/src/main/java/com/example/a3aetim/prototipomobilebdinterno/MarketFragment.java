@@ -93,6 +93,7 @@ public class MarketFragment extends Fragment {
                 Button btn = new Button(getActivity());
                 btn.setText(idapp + nameapp + preco);
                 btn.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                btn.setBackground(getResources().getDrawable(R.drawable.productbackgroud));
                 linearLayout.addView(btn);
                 cursorapp.moveToNext();
             }

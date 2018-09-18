@@ -9,12 +9,14 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.style.BackgroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -24,25 +26,27 @@ import com.vansuita.materialabout.views.AboutView;
 import es.dmoral.toasty.Toasty;
 
 public class ProfileActivity extends AppCompatActivity {
-    RelativeLayout.LayoutParams mparams;
     private CollapsingToolbarLayout collapsingToolbar;
     private AppBarLayout appBarLayout;
-    private RecyclerView recyclerView;
 
 
     private Menu collapsedMenu;
     private boolean appBarExpanded = true;
 
+    private User loggedUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        loggedUser = (User) getIntent().getSerializableExtra("ProfileLoggedUser");
         final Toolbar toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
 
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle("Ysy");
-
+        collapsingToolbar.setTitle(loggedUser.getNameUser());
+        ImageView headerProfile = (ImageView)findViewById(R.id.header);
+        headerProfile.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        headerProfile.setImageBitmap(BitmapFactory.decodeByteArray(loggedUser.getPicUser(),0,loggedUser.getPicUser().length));
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
@@ -99,22 +103,4 @@ public class ProfileActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    //No onCreate
-    //mparams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-    //    AboutView view = AboutBuilder.with(this)
-    //            .setPhoto(R.mipmap.profile_picture)
-    //            .setCover(R.mipmap.profile_cover)
-    //            .setName("Your Full Name")
-    //            .setSubTitle("Mobile Developer")
-    //            .setBrief("I'm warmed of mobile technologies. Ideas maker, curious and nature lover.")
-    //            .setAppIcon(R.mipmap.ic_launcher)
-    //            .setAppName(R.string.app_name)
-    //            .setAppName("fdfdfd")
-    //            .addGitHubLink("user")
-    //            .addFacebookLink("user")
-    //            .addFiveStarsAction()
-    //            .setVersionNameAsAppSubTitle()
-    //            .addShareAction(R.string.app_name)
-    //            .setWrapScrollView(true)
-    //    addContentView(view, mparams);
 }

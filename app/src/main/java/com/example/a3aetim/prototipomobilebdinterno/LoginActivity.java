@@ -397,6 +397,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         startActivity(i);
     }
 
+    //Caso queiramos personalizar a cor de cada toasty.
+
     /*Toasty.Config.getInstance()
     .setErrorColor(@ColorInt int errorColor) // optional
     .setInfoColor(@ColorInt int infoColor) // optional
@@ -416,10 +418,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         Toasty.info(this,"Em desenvolvimento", Toast.LENGTH_SHORT,true).show();
         //Intent i = new Intent(this,CadastroCli.class);
         //startActivity(i);
-    }
-    public void logarPorEnquanto(View view){
-        Intent i = new Intent(this,MainActivity.class);
-        startActivity(i);
     }
 }
 

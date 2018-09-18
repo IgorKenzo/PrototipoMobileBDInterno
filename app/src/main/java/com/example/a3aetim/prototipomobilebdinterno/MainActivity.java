@@ -7,6 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity
         loggedUser = (User) getIntent().getSerializableExtra("LoggedUser");
         Bitmap img = BitmapFactory.decodeByteArray(loggedUser.getPicUser(),0,loggedUser.getPicUser().length);
 
+        RoundedBitmapDrawable imgRound = RoundedBitmapDrawableFactory.create(getResources(),img);
+        imgRound.setCornerRadius(100);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -46,7 +50,7 @@ public class MainActivity extends AppCompatActivity
         ImageView navImgView = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imgvNavHeader);
         TextView txtNomeUsu = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txtvNameUserNav);
         TextView txtEmailUsu = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txtEmailUserNav);
-        navImgView.setImageBitmap(img);
+        navImgView.setImageDrawable(imgRound);
         txtEmailUsu.setText(loggedUser.getEmailUser());
         txtNomeUsu.setText(loggedUser.getNameUser());
         navigationView.setNavigationItemSelectedListener(this);
@@ -68,6 +72,7 @@ public class MainActivity extends AppCompatActivity
     }
     private void openProf(){
         Intent intent = new Intent(this,ProfileActivity.class);
+        intent.putExtra("ProfileLoggedUser",loggedUser);
         startActivity(intent);
     }
 
