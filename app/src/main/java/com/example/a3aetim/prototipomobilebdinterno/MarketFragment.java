@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +16,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+
 public class MarketFragment extends Fragment {
     DatabaseHelper helper;
     private LinearLayout linearLayout = null, linearLayoutUser = null,linearLayoutDev = null;
-    int k;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mRVAdapter;
+    private RecyclerView.LayoutManager mRVLManager;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +38,37 @@ public class MarketFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(k==0) {
-            helper = new DatabaseHelper(getActivity());
+        helper = new DatabaseHelper(getActivity());
+        SQLiteDatabase db = helper.getReadableDatabase();
+        ArrayList<Application> app = new ArrayList<>();
+        mRecyclerView = (RecyclerView)view.findViewById(R.id.recyclerViewMarket);
+        mRecyclerView.setHasFixedSize(true);
+        mRVLManager = new LinearLayoutManager(getActivity());
+
+        Cursor cursorapp = db.rawQuery("SELECT _IdApp, NameApp, PriceApp from Application", null);
+        int idapp;
+        String nameapp;
+        double preco;
+        cursorapp.moveToFirst();
+        for (int j = 0; j < cursorapp.getCount(); j++) {
+            idapp = cursorapp.getInt(0);
+            nameapp = cursorapp.getString(1);
+            preco = cursorapp.getDouble(2);
+            app.add(new Application(nameapp,preco));
+            cursorapp.moveToNext();
+        }
+        cursorapp.close();
+
+        mRVAdapter = new ApplicationAdapter(app);
+
+        mRecyclerView.setLayoutManager(mRVLManager);
+        mRecyclerView.setAdapter(mRVAdapter);
+        /*if(k==0) {
+
             linearLayout = (LinearLayout) view.findViewById(R.id.linearLayoutMarket);
             linearLayoutUser = (LinearLayout) view.findViewById(R.id.linerlayouthorizontalMarketuser);
             linearLayoutDev = (LinearLayout) view.findViewById(R.id.linearlayouthorizontalMarketdev);
-            SQLiteDatabase db = helper.getReadableDatabase();
+
             Cursor cursor = db.rawQuery("SELECT _IdUser, NameUser, PicUser, EmailUser, PassUser from User", null);
             int id = 0;
             String name = "";
@@ -93,13 +124,13 @@ public class MarketFragment extends Fragment {
                 Button btn = new Button(getActivity());
                 btn.setText(idapp + nameapp + preco);
                 btn.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                btn.setBackground(getResources().getDrawable(R.drawable.productbackgroud));
                 linearLayout.addView(btn);
                 cursorapp.moveToNext();
             }
             cursorapp.close();
         }
-        else{}
+        else{}*/
+
     }
     @Override
     public void onDestroy(){

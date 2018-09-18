@@ -6,12 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MarketFragment">
 
-    <ScrollView
-        android:id="@+id/ScrollViewMarketFrame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
+        <!--<LinearLayout
             android:id="@+id/linearLayoutMarket"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,7 +53,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Applications:" />
-        </LinearLayout>
-    </ScrollView>
 
+        </LinearLayout>-->
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:scrollbars="vertical"
+            android:id="@+id/recyclerViewMarket"
+            android:layout_marginTop="5dp"/>
 </FrameLayout>
