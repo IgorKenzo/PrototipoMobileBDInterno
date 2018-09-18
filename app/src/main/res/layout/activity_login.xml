@@ -32,7 +32,7 @@
         android:layout_height="80dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        app:srcCompat="@drawable/myndielogo3"
+        app:srcCompat="@drawable/myndielogo"
 
         />
 

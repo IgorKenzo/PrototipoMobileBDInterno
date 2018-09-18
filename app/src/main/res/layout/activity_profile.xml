@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
+        android:background="@color/colorBackground"
         android:theme="@style/AppTheme.NoActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -33,13 +34,6 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_gravity="top"
-                android:fitsSystemWindows="true"
-                android:background="@drawable/scrim" />
-
-            <View
-                android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_gravity="bottom"
                 android:background="@drawable/scrim" />
@@ -52,13 +46,46 @@
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/txtEmailProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/spacing_medium_cad"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/txtCountryProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/spacing_medium_cad"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/txtLanguageProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/spacing_medium_cad"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/txtCreationDateProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/spacing_medium_cad"
+                android:textSize="20dp"/>
+        </LinearLayout>
+
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <!--<android.support.v7.widget.RecyclerView
         android:id="@+id/recyclableViewProfile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
 
 </android.support.design.widget.CoordinatorLayout>

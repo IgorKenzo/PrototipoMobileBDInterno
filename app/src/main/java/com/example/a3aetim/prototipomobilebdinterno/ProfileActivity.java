@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vansuita.materialabout.builder.AboutBuilder;
@@ -29,7 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
     private CollapsingToolbarLayout collapsingToolbar;
     private AppBarLayout appBarLayout;
 
-
+    TextView mEmail,mCrtDate,mCountry,mLang;
     private Menu collapsedMenu;
     private boolean appBarExpanded = true;
 
@@ -38,16 +39,19 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        loggedUser = (User) getIntent().getSerializableExtra("ProfileLoggedUser");
+        loggedUser = (User) getIntent().getSerializableExtra("ProfileUser");
         final Toolbar toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
-
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        mCountry = (TextView)findViewById(R.id.txtCountryProfile);
+        mEmail = (TextView)findViewById(R.id.txtEmailProfile);
+        mCrtDate = (TextView)findViewById(R.id.txtCreationDateProfile);
+        mLang = (TextView)findViewById(R.id.txtLanguageProfile);
         collapsingToolbar.setTitle(loggedUser.getNameUser());
+        collapsingToolbar.setExpandedTitleColor(Color.WHITE);
+        collapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);
         ImageView headerProfile = (ImageView)findViewById(R.id.header);
-        headerProfile.setScaleType(ImageView.ScaleType.FIT_CENTER);
         headerProfile.setImageBitmap(BitmapFactory.decodeByteArray(loggedUser.getPicUser(),0,loggedUser.getPicUser().length));
-
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
@@ -59,13 +63,16 @@ public class ProfileActivity extends AppCompatActivity {
                     invalidateOptionsMenu();
                 } else {
                     appBarExpanded = true;
+                    collapsingToolbar.setPadding(0,10,0,0);
                     invalidateOptionsMenu();
                 }
             }
         });
-
+        mCrtDate.setText(String.valueOf(loggedUser.getCrtDateUser()));
+        mLang.setText(String.valueOf(loggedUser.getIdLang()));
+        mEmail.setText(String.valueOf(loggedUser.getEmailUser()));
+        mCountry.setText(String.valueOf(loggedUser.getCountryUser()));
     }
-
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {

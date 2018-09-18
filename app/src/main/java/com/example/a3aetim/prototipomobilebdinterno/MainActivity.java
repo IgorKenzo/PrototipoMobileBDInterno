@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity
     }
     private void openProf(){
         Intent intent = new Intent(this,ProfileActivity.class);
-        intent.putExtra("ProfileLoggedUser",loggedUser);
+        intent.putExtra("ProfileUser",loggedUser);
         startActivity(intent);
     }
 
