@@ -7,4 +7,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="spacing_medium">30dp</dimen>
+    <dimen name="spacing_medium_cad">30dp</dimen>
 </resources>

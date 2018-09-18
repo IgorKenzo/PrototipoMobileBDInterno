@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
 import android.app.Activity;
@@ -31,8 +32,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import es.dmoral.toasty.Toasty;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -63,7 +69,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-
+    private String chkEmail,chkPass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +100,34 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+    }
+/*User(_IdUser INTEGER PRIMARY KEY AUTOINCREMENT, LoginUser TEXT UNIQUE, PassUser TEXT, NameUser TEXT, " +
+                   "BirthUser DATE, EmailUser TEXT, PicUser BLOB, CountryUser INTEGER, TypeUser TINYINT, CrtDateUser DATE, IdLang INTEGER, IdDev INTEGER REFERENCES Developer(_IdDev));");*/
+    public void trocar(){
+        DatabaseHelper helper = new DatabaseHelper(this);
+        SQLiteDatabase db = helper.getReadableDatabase();
+        String query = "SELECT * FROM User WHERE EmailUser =" + " '"+chkEmail+"'" + "AND" +" '"+ chkPass+"'";
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        User usuario = new User();
+        for(int i = 0; i < cursor.getCount(); i++){
+            int id = cursor.getInt(0);
+            String username = cursor.getString(1);
+            String password = cursor.getString(2);
+            String name = cursor.getString(3);
+            String birth = cursor.getString(4);
+            String email = cursor.getString(5);
+            byte[] pic = cursor.getBlob(6);
+            int country = cursor.getInt(7);
+            int type = cursor.getInt(8);
+            String crt = cursor.getString(9);
+            int idlang = cursor.getInt(10);
+            int iddev = cursor.getInt(11);
+            usuario = new User(id,birth,country,crt,email,iddev,idlang,username,name,password,pic,type);
+        }
+        Intent i = new Intent(this, MainActivity.class);
+        i.putExtra("LoggedUser",usuario);
+        startActivity(i);
     }
 
     private void populateAutoComplete() {
@@ -152,13 +186,19 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
-
+        chkPass = password;
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
+        }
+        //Define a senha como campo obrigatório
+        if(TextUtils.isEmpty(password)){
+            mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
             cancel = true;
         }
@@ -189,13 +229,22 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        DatabaseHelper helper = new DatabaseHelper(this);
+        SQLiteDatabase db = helper.getReadableDatabase();
+        String query = "SELECT * FROM User WHERE EmailUser = "+" '"+email+"'";
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor.getCount()==1){
+            chkEmail = email;
+            helper.close();
+            return true;
+        }
+        else{helper.close();return false;}
     }
-
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
     }
+
 
     /**
      * Shows the progress UI and hides the login form.
@@ -330,7 +379,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(false);
 
             if (success) {
-                finish();
+                trocar();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
@@ -347,8 +396,24 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         Intent i = new Intent(this,CadastroCli.class);
         startActivity(i);
     }
+
+    /*Toasty.Config.getInstance()
+    .setErrorColor(@ColorInt int errorColor) // optional
+    .setInfoColor(@ColorInt int infoColor) // optional
+    .setSuccessColor(@ColorInt int successColor) // optional
+    .setWarningColor(@ColorInt int warningColor) // optional
+    .setTextColor(@ColorInt int textColor) // optional
+    .tintIcon(boolean tintIcon) // optional (apply textColor also to the icon)
+    .setToastTypeface(@NonNull Typeface typeface) // optional
+    .setTextSize(int sizeInSp) // optional
+    .apply(); // required*/
+
+    //caso queira personalizar
+    //Toasty.custom(yourContext, "I'm a custom Toast", yourIconDrawable, tintColor, duration, withIcon,
+    //shouldTint).show();
+
     public void opanFtgPass(View view){
-        Toast.makeText(this, "Esqueci a senha", Toast.LENGTH_SHORT).show();
+        Toasty.info(this,"Em desenvolvimento", Toast.LENGTH_SHORT,true).show();
         //Intent i = new Intent(this,CadastroCli.class);
         //startActivity(i);
     }

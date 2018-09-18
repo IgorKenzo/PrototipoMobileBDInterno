@@ -17,21 +17,20 @@
             android:id="@+id/lblTexto"
             android:layout_width="319dp"
             android:layout_height="wrap_content"
-            android:text="Insira os valores abaixo para se cadastrar" />
+            android:textSize="40px"
+            android:text="Preencha os campos abaixo para criar uma nova conta:" />
 
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/edtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium_cad"
             android:backgroundTint="@color/colorText"
             android:ems="10"
-            android:hint="Name"
+            android:hint="@string/activity_hint_etname"
             android:inputType="textPersonName"
+            android:singleLine="true"
             android:textColor="@color/colorText"
             android:textColorHint="@color/colorText" />
 
@@ -39,10 +38,12 @@
             android:id="@+id/edtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium_cad"
             android:backgroundTint="@color/colorText"
             android:ems="10"
-            android:hint="Email"
+            android:hint="@string/activity_hint_etemail"
             android:inputType="textEmailAddress"
+            android:singleLine="true"
             android:textColor="@color/colorText"
             android:textColorHint="@color/colorText" />
 
@@ -50,9 +51,11 @@
             android:id="@+id/edtUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium_cad"
             android:backgroundTint="@color/colorText"
             android:ems="10"
-            android:hint="Username"
+            android:hint="@string/activity_hint_etusername"
+            android:singleLine="true"
             android:textColor="@color/colorText"
             android:textColorHint="@color/colorText" />
 
@@ -60,10 +63,12 @@
             android:id="@+id/edtPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium_cad"
             android:backgroundTint="@color/colorText"
             android:ems="10"
-            android:hint="Password"
+            android:hint="@string/activity_hint_etsenha"
             android:inputType="textPassword"
+            android:singleLine="true"
             android:textColor="@color/colorText"
             android:textColorHint="@color/colorText" />
 
@@ -71,10 +76,12 @@
             android:id="@+id/edtBirth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium_cad"
             android:backgroundTint="@color/colorText"
             android:ems="10"
-            android:hint="Data de nascimento(dd/mm/yyyy)"
+            android:hint="@string/activity_hint_etdata"
             android:inputType="date"
+            android:singleLine="true"
             android:textColor="@color/colorText"
             android:textColorHint="@color/colorText" />
 
@@ -82,7 +89,8 @@
             android:id="@+id/textView14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Escolha seu país:" />
+            android:text="@string/activity_hint_etcountry"
+            android:layout_marginTop="@dimen/spacing_medium_cad" />
 
         <Spinner
             android:id="@+id/spnCountry"
@@ -93,36 +101,25 @@
             android:id="@+id/txtvLang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Escolha sua língua:" />
+            android:text="@string/activity_hint_etlanguage"
+            android:layout_marginTop="@dimen/spacing_medium_cad" />
 
         <Spinner
             android:id="@+id/spnLang"
             android:layout_width="match_parent"
             android:layout_height="50dp" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Imagem" />
+        <Button
+            android:id="@+id/btnChoosePic"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/activity_button_choosepic"
+            android:layout_marginTop="50dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnChoosePic"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Escolher" />
-
-            <ImageView
-                android:id="@+id/imgvArchive"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/imgvArchive"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp" />
 
         <Button
             android:id="@+id/btnCad"
@@ -133,11 +130,10 @@
             android:text="Cadastrar" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnCadProd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="listar"
-            android:text="listar" />
-
+            android:onClick="CadProd"
+            android:text="Inserir produtos" />
     </LinearLayout>
 </ScrollView>
