@@ -117,8 +117,6 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_Search) {
 
         }
-        else if(id == R.id.nav_SearchApp){}
-        else if(id == R.id.nav_SearchDev){}
         else if (id == R.id.nav_Market) {
             // Pega o FragmentManager
             FragmentManager fm = getSupportFragmentManager();

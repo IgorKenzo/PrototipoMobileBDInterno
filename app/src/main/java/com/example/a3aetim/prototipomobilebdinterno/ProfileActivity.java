@@ -69,12 +69,12 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         mCrtDate.setText(String.valueOf(loggedUser.getCrtDateUser()));
-        mLang.setText(String.valueOf(loggedUser.getIdLang()));
+        //mLang.setText(String.valueOf(loggedUser.getIdLang()));
         mEmail.setText(String.valueOf(loggedUser.getEmailUser()));
-        mCountry.setText(String.valueOf(loggedUser.getCountryUser()));
+        //mCountry.setText(String.valueOf(loggedUser.getCountryUser()));
     }
 
-    @Override
+   /* @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (collapsedMenu != null
                 && (!appBarExpanded || collapsedMenu.size() != 1)) {
@@ -86,7 +86,7 @@ public class ProfileActivity extends AppCompatActivity {
             //expanded
         }
         return super.onPrepareOptionsMenu(collapsedMenu);
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

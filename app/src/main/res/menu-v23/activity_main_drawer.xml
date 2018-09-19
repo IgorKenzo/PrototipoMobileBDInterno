@@ -7,24 +7,14 @@
         <item
             android:id="@+id/nav_Search"
             android:title="@string/activity_title_item_search" />
-        <item
-            android:id="@+id/nav_SearchApp"
-            android:title="@string/activity_title_item_listApps"/>
-        <item
-            android:id="@+id/nav_SearchDev"
-            android:title="@string/activity_title_item_listDevs"/>
+
         <item
             android:id="@+id/nav_Market"
             android:title="@string/activity_title_item_store" />
-        <item
-            android:id="@+id/nav_Avaliation"
-            android:title="@string/activity_title_item_avaliations" />
-        <item
-            android:id="@+id/nav_Discussions"
-            android:title="@string/activity_title_item_discussions"/>
+
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Em desenvolvimento">
         <menu>
             <item
                 android:id="@+id/nav_Confing"
@@ -32,6 +22,12 @@
             <item
                 android:id="@+id/nav_RateUs"
                 android:title="@string/activity_title_item_rateus" />
+            <item
+                android:id="@+id/nav_Avaliation"
+                android:title="@string/activity_title_item_avaliations" />
+            <item
+                android:id="@+id/nav_Discussions"
+                android:title="@string/activity_title_item_discussions"/>
         </menu>
     </item>
 

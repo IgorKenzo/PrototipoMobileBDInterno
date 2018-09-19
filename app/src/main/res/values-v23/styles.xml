@@ -11,6 +11,5 @@
         <item name="android:titleTextColor">@color/colorText</item>
         <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:textColorAlertDialogListItem">@color/colorText</item>
-
     </style>
 </resources>

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="5dp"
+    app:cardCornerRadius="15dp"
     app:cardBackgroundColor="@color/colorSecondary"
     android:layout_marginTop="5dp">
 
@@ -35,6 +35,11 @@
             android:layout_below="@+id/txtTitleAppMarket"
             android:layout_toEndOf="@+id/txtTitleAppMarket"
             android:text="dddd" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:id="@+id/txtIdAppMarket"/>
     </RelativeLayout>
 
 </android.support.design.card.MaterialCardView>
