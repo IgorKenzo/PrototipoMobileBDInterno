@@ -15,7 +15,7 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener{
-        void onItemClick(int position);
+        void onItemClick(View view, int position);
     }
     public void setOnitemClickListener(OnItemClickListener listener){
         mListener = listener;
@@ -25,7 +25,7 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
         public ImageView mImageView;
         public TextView mTitle,mDesc,mId;
 
-        public ApplicationViewHolder(View itemView, final OnItemClickListener listener){
+        public ApplicationViewHolder(final View itemView, final OnItemClickListener listener){
             super(itemView);
             mImageView = itemView.findViewById(R.id.imgvAppItemMarket);
             mId = itemView.findViewById(R.id.txtIdAppMarket);
@@ -37,7 +37,7 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
                     if(listener != null){
                         int pos =getAdapterPosition();
                         if(pos != RecyclerView.NO_POSITION){
-                            listener.onItemClick(pos);
+                            listener.onItemClick(itemView,pos);
                         }
                     }
                 }

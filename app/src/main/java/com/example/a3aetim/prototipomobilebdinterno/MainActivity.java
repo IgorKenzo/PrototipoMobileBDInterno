@@ -3,12 +3,15 @@ package com.example.a3aetim.prototipomobilebdinterno;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.transition.ChangeBounds;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.transition.Slide;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,9 +23,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import es.dmoral.toasty.Toasty;
 
 
 public class MainActivity extends AppCompatActivity
@@ -31,6 +31,14 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /*Explode explodeTransit = new Explode();
+        explodeTransit.setDuration(1000);
+        Fade fadeTransit = new Fade();
+        fadeTransit.setDuration(1000);
+        getWindow().setExitTransition(fadeTransit);
+        getWindow().setReenterTransition(explodeTransit);*/
+        getWindow().setSharedElementExitTransition(new ChangeBounds());
+        //////////
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         loggedUser = (User) getIntent().getSerializableExtra("LoggedUser");
