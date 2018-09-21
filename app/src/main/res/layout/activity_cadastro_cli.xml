@@ -129,11 +129,23 @@
             android:onClick="Cad"
             android:text="Cadastrar" />
 
+
+
+        <!--<DatePicker
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </DatePicker>-->
+        <!--https://developer.android.com/guide/topics/ui/controls/pickers#java-->
+
+
         <Button
             android:id="@+id/btnCadProd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="CadProd"
             android:text="Inserir produtos" />
+
+
     </LinearLayout>
 </ScrollView>

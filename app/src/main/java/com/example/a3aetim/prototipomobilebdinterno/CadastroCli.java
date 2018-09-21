@@ -16,9 +16,11 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Gallery;
@@ -43,6 +45,7 @@ import static android.media.MediaRecorder.VideoSource.CAMERA;
 import static android.widget.Toast.LENGTH_SHORT;
 
 public class CadastroCli extends Activity implements AdapterView.OnItemSelectedListener {
+
     DatabaseHelper helper;
     EditText txtName, txtEmail,txtUser, txtPass, txtBirth;
     Spinner country,lang;
@@ -53,13 +56,18 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
     Uri imageURI;
     ImageView imgvArchive;
     Bitmap bitmap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_cli);
+
         btnChoosePic = (Button)findViewById(R.id.btnChoosePic);
+
         df = new SimpleDateFormat("dd/MM/yyyy");
+
         helper = new DatabaseHelper(this);
+
         country = (Spinner)findViewById(R.id.spnCountry);
         lang = (Spinner)findViewById(R.id.spnLang);
         country.setOnItemSelectedListener(this);
@@ -70,28 +78,33 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
                 showPictureDialog();
             }
         });
+
         txtName = (EditText)findViewById(R.id.edtName);
-        txtEmail = (EditText)findViewById(R.id.edtEmail);
         txtUser = (EditText)findViewById(R.id.edtUser);
         txtPass = (EditText)findViewById(R.id.edtPass);
         txtEmail = (EditText)findViewById(R.id.edtEmail);
+        //TODO: Criar um DatePickerDialog
         txtBirth = (EditText)findViewById(R.id.edtBirth);
-        crtdata = new Date();
-        imgvArchive = (ImageView)findViewById(R.id.imgvArchive);
-        List<String> paises = new ArrayList<>(Arrays.asList("Brasil","Estados Unidos","Canadá"));
 
+        crtdata = new Date();
+
+        imgvArchive = (ImageView)findViewById(R.id.imgvArchive);
+
+        List<String> paises = new ArrayList<>(Arrays.asList("Brasil","Estados Unidos","Canadá"));
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, paises );
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         country.setAdapter(dataAdapter);
 
         List<String> linguagens = new ArrayList<>(Arrays.asList("Português","Inglês"));
-
         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, linguagens );
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         lang.setAdapter(dataAdapter2);
+
+
     }
+
     private void showPictureDialog(){
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this,AlertDialog.THEME_DEVICE_DEFAULT_DARK);
         pictureDialog.setTitle("Selecione");
@@ -168,7 +181,13 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
     public void Cad(View view){
+        tryCad();
+    }
+
+    public void cadUser(){
         byte[] img = getBitmapAsByteArray(bitmap);
         countryid = country.getSelectedItemPosition();
         langid = lang.getSelectedItemPosition();
@@ -198,11 +217,13 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
         return outputStream.toByteArray();
     }
+
     @Override
     protected void onDestroy(){
         helper.close();
         super.onDestroy();
     }
+
     public void CadProd(View view){
         SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues values =  new ContentValues();
@@ -235,4 +256,121 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
             Toasty.error(this, "Um erro ocorreu!", LENGTH_SHORT,false).show();
         }
     }
+
+    public void tryCad(){
+        String name =txtName.getText().toString();
+        String password = txtPass.getText().toString();
+        String email = txtEmail.getText().toString();
+        String user = txtUser.getText().toString();
+        String birth = txtBirth.getText().toString();
+        Date d = new Date();
+
+        txtEmail.setError(null);
+        //txtBirth.setError(null);
+        //TODO: Mudar isso (Deixa que eu mudo Igor)
+        txtName.setError(null);
+        txtPass.setError(null);
+        txtUser.setError(null);
+
+        boolean cancel = false;
+        View focusView = null;
+
+        if(TextUtils.isEmpty(birth)){
+            txtBirth.setError(getString(R.string.error_field_required));
+            cancel = true;
+            focusView = txtBirth;
+        }
+        else if(!isDateValid()){
+            txtBirth.setError(getString(R.string.error_invalid_date));
+            cancel = true;
+            focusView = txtBirth;
+        }
+
+        if(TextUtils.isEmpty(password)){
+            txtPass.setError(getString(R.string.error_field_required));
+            cancel = true;
+            focusView = txtPass;
+        }
+        else if(!isPasswordValid(password)){
+            txtPass.setError(getString(R.string.error_invalid_password));
+            cancel = true;
+            focusView = txtPass;
+        }
+
+        if(TextUtils.isEmpty(user)){
+            txtUser.setError(getString(R.string.error_field_required));
+            cancel = true;
+            focusView = txtUser;
+        }
+        else if(!isUserNameValid(user)){
+            txtUser.setError(getString(R.string.error_invalid_user));
+            cancel = true;
+            focusView = txtUser;
+        }
+
+        if(TextUtils.isEmpty(email)){
+            txtEmail.setError(getString(R.string.error_field_required));
+            cancel = true;
+            focusView = txtEmail;
+        }
+        else if(!isEmailValid(email)){
+            txtEmail.setError(getString(R.string.error_invalid_email));
+            cancel = true;
+            focusView = txtEmail;
+        }
+
+        if(TextUtils.isEmpty(name)){
+            txtName.setError(getString(R.string.error_field_required));
+            cancel = true;
+            focusView = txtName;
+        }
+        else if(!isNameValid(name)){
+            txtName.setError(getString(R.string.error_invalid_name));
+            cancel = true;
+            focusView = txtName;
+        }
+
+        if(cancel){
+            //Código caso algum campo esteja inválido
+            focusView.requestFocus();
+        }
+        else{
+            cadUser();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+
+
+
+    }
+
+    public boolean isNameValid(String name){
+        return name.length() > 0;
+    }
+
+    public boolean isEmailValid(String email){
+        return email.contains("@") && email.contains(".");
+    }
+
+    public boolean isUserNameValid(String user){
+        //Lógica para validar nome de usuário
+        return true;
+    }
+
+    public boolean isPasswordValid(String password){
+        return password.length() > 4;
+    }
+
+    public boolean isDateValid(){
+        return true;
+    }
+
+    public boolean isPicUserValid(){
+        //Lógica para validar foto
+        return true;
+    }
+
+
+
+
 }

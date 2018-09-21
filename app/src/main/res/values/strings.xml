@@ -35,10 +35,16 @@
     <string name="prompt_password">Senha</string>
     <string name="action_sign_in">Login</string>
     <string name="action_sign_in_short">Login</string>
-    <string name="error_invalid_email">O endereço de e-mail é inválido</string>
+
+    <string name="error_invalid_name">O nome digitado é inválido</string>
+    <string name="error_invalid_email">O endereço de e-mail digitado é inválido</string>
+    <string name="error_invalid_date">A data informada é inválida</string>
     <string name="error_invalid_password">A senha informada é muito curta</string>
+    <string name="error_invalid_user">O nome de usuário já está sendo utilizado. Utilize outro nome de usuário</string>
+
     <string name="error_incorrect_password">A senha está incorreta</string>
-    <string name="error_field_required">Esse campo é obrigatório</string>
+    <string name="error_field_required">O campo é obrigatório</string>
+
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
