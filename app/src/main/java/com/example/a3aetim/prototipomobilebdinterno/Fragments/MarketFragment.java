@@ -49,8 +49,8 @@ public class MarketFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
     }
+
     private void load(){
         helper = new DatabaseHelper(getActivity());
         db = helper.getReadableDatabase();

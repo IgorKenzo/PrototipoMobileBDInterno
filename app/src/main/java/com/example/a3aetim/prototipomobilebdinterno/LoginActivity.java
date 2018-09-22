@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
@@ -41,6 +42,7 @@ import java.util.List;
 import es.dmoral.toasty.Toasty;
 
 import static android.Manifest.permission.READ_CONTACTS;
+import static com.example.a3aetim.prototipomobilebdinterno.Splash.PREF_NAME;
 
 /**
  * A login screen that offers login via email/password.
@@ -221,6 +223,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
+            SharedPreferences sp = getSharedPreferences(PREF_NAME,0);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("EmailLoggedUser",email);
+            editor.commit();
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);

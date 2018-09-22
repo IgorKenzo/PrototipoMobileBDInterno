@@ -1,6 +1,7 @@
 package com.example.a3aetim.prototipomobilebdinterno;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.FragmentManager;
@@ -22,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.a3aetim.prototipomobilebdinterno.Fragments.*;
+
+import static com.example.a3aetim.prototipomobilebdinterno.Splash.PREF_NAME;
 
 
 public class MainActivity extends AppCompatActivity
@@ -146,6 +149,13 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_RateUs) {
 
+        }
+        else  if (id == R.id.nav_LogOut){
+            SharedPreferences sp = getSharedPreferences(PREF_NAME,0);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("EmailLoggedUser","");
+            editor.commit();
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

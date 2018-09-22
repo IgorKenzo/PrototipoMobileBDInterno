@@ -1,10 +1,11 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <SwitchPreference
         android:defaultValue="true"
         android:key="example_switch"
-        android:textColor="@color/colorText"
         android:summary="@string/pref_description_social_recommendations"
+        android:textColor="@color/colorText"
         android:title="@string/pref_title_social_recommendations" />
 
     <!-- NOTE: EditTextPreference accepts EditText attributes. -->
