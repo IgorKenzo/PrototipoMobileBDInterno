@@ -9,7 +9,7 @@ public class Application implements Serializable{
     //private String Description;
     private String Version;
 
-    Application(int id,String title,double preco,String ver){
+    public Application(int id, String title, double preco, String ver){
         _IdApp = id;
         Title = title;
         Price = preco;

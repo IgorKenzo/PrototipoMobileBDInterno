@@ -9,9 +9,6 @@ import android.os.Bundle;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.transition.ChangeBounds;
-import android.transition.Explode;
-import android.transition.Fade;
-import android.transition.Slide;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,6 +20,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.a3aetim.prototipomobilebdinterno.Fragments.*;
 
 
 public class MainActivity extends AppCompatActivity
@@ -126,16 +125,20 @@ public class MainActivity extends AppCompatActivity
 
         }
         else if (id == R.id.nav_Market) {
-            // Pega o FragmentManager
             FragmentManager fm = getSupportFragmentManager();
-            // Abre uma transação e adiciona
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.frameContentMain, new MarketFragment());
             ft.commit();
         } else if (id == R.id.nav_Avaliation) {
-
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.frameContentMain, new CommentFragment());
+            ft.commit();
         } else if (id == R.id.nav_Discussions) {
-
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.frameContentMain, new DiscussionFragment());
+            ft.commit();
 
         } else if (id == R.id.nav_Confing) {
             Intent intent = new Intent(this,SettingsActivity.class);

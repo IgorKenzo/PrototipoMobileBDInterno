@@ -1,4 +1,4 @@
-package com.example.a3aetim.prototipomobilebdinterno;
+package com.example.a3aetim.prototipomobilebdinterno.Fragments;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,6 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.example.a3aetim.prototipomobilebdinterno.Application;
+import com.example.a3aetim.prototipomobilebdinterno.ApplicationActivity;
+import com.example.a3aetim.prototipomobilebdinterno.ApplicationAdapter;
+import com.example.a3aetim.prototipomobilebdinterno.DatabaseHelper;
+import com.example.a3aetim.prototipomobilebdinterno.R;
 
 import java.util.ArrayList;
 
