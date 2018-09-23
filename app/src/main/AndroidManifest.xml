@@ -37,9 +37,6 @@
         <activity
             android:name=".ProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
         <activity android:name=".ApplicationActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>

@@ -101,8 +101,8 @@ public class ProfileActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 return true;
-            case R.id.action_settings:
-                return true;
+            /*case R.id.action_settings:
+                return true;*/
         }
         if (item.getTitle() == "Add") {
             Toasty.info(this, "clicked add", Toast.LENGTH_SHORT).show();
