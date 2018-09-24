@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <android.support.v7.preference.SwitchPreferenceCompat
-        android:defaultValue="true"
-        android:title="Settings option"
-        android:key="example_switch"
-        android:summary="Turn this option on or off" />
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<!--<android.support.v7.preference.SwitchPreferenceCompat
+    android:defaultValue="true"
+    android:title="Settings option"
+    android:key="example_switch"
+    android:summary="Turn this option on or off" />-->
+
+   <CheckBoxPreference
+       android:defaultValue="true"
+       android:summaryOff="Desativada"
+       android:summaryOn="Ativada"
+       android:title="Notificação" />
+   <CheckBoxPreference
+       android:defaultValue="true"
+       android:summaryOff="Desativado"
+       android:summaryOn="Ativado"
+       android:title="Som" />
+   <CheckBoxPreference
+       android:defaultValue="true"
+       android:summaryOff="Desativada"
+       android:summaryOn="Ativada"
+       android:title="Vibração" />
+   <ListPreference
+       android:entries="@array/list_preference_entries"
+       android:entryValues="@array/list_preference_entries"
+       android:key="Key_Select_Idioma"
+       android:summary="Escolha o idioma"
+       android:title="Idioma" />
 </PreferenceScreen>

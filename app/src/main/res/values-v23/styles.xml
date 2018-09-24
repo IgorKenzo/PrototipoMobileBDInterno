@@ -13,7 +13,8 @@
         <item name="android:textColorAlertDialogListItem">@color/colorText</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:colorAccent">@color/colorAccent</item>
-        <item name="colorControlActivated">@color/colorPrimary</item>
         <item name="android:textColorSecondary">@color/colorGray</item>
+        <item name="colorControlActivated">@color/colorControlActivated</item>
+        <item name="colorControlHighlight">@color/colorGray</item>
     </style>
 </resources>
