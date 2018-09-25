@@ -10,25 +10,26 @@
    <CheckBoxPreference
        android:key="notification_chk"
        android:defaultValue="true"
-       android:summaryOff="Desativada"
-       android:summaryOn="Ativada"
-       android:title="Notificação" />
+       android:summaryOff="@string/pref_deactivated"
+       android:summaryOn="@string/pref_activated"
+       android:title="@string/pref_title_notification" />
    <CheckBoxPreference
        android:key="sound_chk"
        android:defaultValue="true"
-       android:summaryOff="Desativado"
-       android:summaryOn="Ativado"
-       android:title="Som" />
+       android:summaryOff="@string/pref_deactivated"
+       android:summaryOn="@string/pref_activated"
+       android:title="@string/pref_title_sound" />
    <CheckBoxPreference
        android:key="vibration_chk"
        android:defaultValue="true"
-       android:summaryOff="Desativada"
-       android:summaryOn="Ativada"
-       android:title="Vibração" />
+       android:summaryOff="@string/pref_deactivated"
+       android:summaryOn="@string/pref_activated"
+       android:title="@string/pref_title_vibrate" />
    <ListPreference
-       android:entries="@array/list_preference_entries"
-       android:entryValues="@array/list_preference_entries"
-       android:key="select_idioma"
-       android:summary="Escolha o idioma"
-       android:title="Idioma" />
+       android:entries="@array/list_preference_languages"
+       android:entryValues="@array/list_preference_languages"
+       android:key="selec_lang"
+       android:summary="@string/pref_choose_language"
+       android:title="@string/pref_title_language" />
+
 </PreferenceScreen>

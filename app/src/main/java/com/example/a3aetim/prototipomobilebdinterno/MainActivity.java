@@ -2,6 +2,7 @@ package com.example.a3aetim.prototipomobilebdinterno;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.Fragment;
@@ -26,6 +27,9 @@ import android.widget.TextView;
 
 import com.example.a3aetim.prototipomobilebdinterno.Fragments.*;
 
+import java.util.Locale;
+
+import static com.example.a3aetim.prototipomobilebdinterno.SettingsActivity.KEY_LANGUAGE;
 import static com.example.a3aetim.prototipomobilebdinterno.Splash.PREF_NAME;
 
 
@@ -36,21 +40,19 @@ public class MainActivity extends AppCompatActivity
     Bitmap img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /*Explode explodeTransit = new Explode();
-        explodeTransit.setDuration(1000);
-        Fade fadeTransit = new Fade();
-        fadeTransit.setDuration(1000);
-        getWindow().setExitTransition(fadeTransit);
-        getWindow().setReenterTransition(explodeTransit);*/
         getWindow().setSharedElementExitTransition(new ChangeBounds());
         //////////
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (loggedUser == null){
-            loggedUser = (User) getIntent().getSerializableExtra("LoggedUser");
-            img = BitmapFactory.decodeByteArray(loggedUser.getPicUser(),0,loggedUser.getPicUser().length);
+        if(savedInstanceState == null) {
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.add(R.id.frameContentMain, new MarketFragment());
+            ft.commit();
         }
 
+        loggedUser = (User) getIntent().getSerializableExtra("LoggedUser");
+        img = BitmapFactory.decodeByteArray(loggedUser.getPicUser(),0,loggedUser.getPicUser().length);
 
         RoundedBitmapDrawable imgRound = RoundedBitmapDrawableFactory.create(getResources(),img);
         imgRound.setCornerRadius(100);
@@ -79,12 +81,10 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        // Pega o FragmentManager
-        FragmentManager fm = getSupportFragmentManager();
-        // Abre uma transação e adiciona
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.frameContentMain, new MarketFragment());
-        ft.commit();
+        SharedPreferences sp = getSharedPreferences(PREF_NAME,0);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("EmailLoggedUser",loggedUser.getEmailUser());
+        editor.commit();
     }
     private void openProf(){
         Intent intent = new Intent(this,ProfileActivity.class);

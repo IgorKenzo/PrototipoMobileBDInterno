@@ -26,15 +26,17 @@
             android:id="@+id/txtTitleAppMarket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/imgvAppItemMarket"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="107dp"
             android:text="dddd" />
 
         <TextView
             android:id="@+id/txtAppDescMarket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtTitleAppMarket"
-            android:layout_toEndOf="@+id/txtTitleAppMarket"
+            android:layout_alignStart="@+id/txtTitleAppMarket"
+            android:layout_centerVertical="true"
             android:text="dddd" />
         <TextView
             android:layout_width="wrap_content"
