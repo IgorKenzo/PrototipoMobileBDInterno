@@ -4,20 +4,23 @@
 <!--<android.support.v7.preference.SwitchPreferenceCompat
     android:defaultValue="true"
     android:title="Settings option"
-    android:key="example_switch"
-    android:summary="Turn this option on or off" />-->
+   android:key="example_switch"
+   android:summary="Turn this option on or off" />-->
 
    <CheckBoxPreference
+       android:key="notification_chk"
        android:defaultValue="true"
        android:summaryOff="Desativada"
        android:summaryOn="Ativada"
        android:title="Notificação" />
    <CheckBoxPreference
+       android:key="sound_chk"
        android:defaultValue="true"
        android:summaryOff="Desativado"
        android:summaryOn="Ativado"
        android:title="Som" />
    <CheckBoxPreference
+       android:key="vibration_chk"
        android:defaultValue="true"
        android:summaryOff="Desativada"
        android:summaryOn="Ativada"
@@ -25,7 +28,7 @@
    <ListPreference
        android:entries="@array/list_preference_entries"
        android:entryValues="@array/list_preference_entries"
-       android:key="Key_Select_Idioma"
+       android:key="select_idioma"
        android:summary="Escolha o idioma"
        android:title="Idioma" />
 </PreferenceScreen>

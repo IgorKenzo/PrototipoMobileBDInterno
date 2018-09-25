@@ -19,13 +19,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a3aetim.prototipomobilebdinterno.R;
+import com.example.a3aetim.prototipomobilebdinterno.SettingsActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SettingsFragment extends PreferenceFragmentCompat {
-    public static final String
-            KEY_NOT = "notification_chk";
+
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);

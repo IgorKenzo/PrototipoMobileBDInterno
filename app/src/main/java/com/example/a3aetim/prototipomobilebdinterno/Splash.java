@@ -16,38 +16,17 @@ import es.dmoral.toasty.Toasty;
 public class Splash extends AppCompatActivity {
     public static String PREF_NAME = "Preferencias";
     SharedPreferences sp;
+    Intent intent,i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        final Intent intent = new Intent(this, LoginActivity.class);
-        final Intent i = new Intent(this, MainActivity.class);
+        intent = new Intent(this, LoginActivity.class);
+        i = new Intent(this, MainActivity.class);
         final Context co = this;
-        Thread thread = new Thread(){
-            public void run(){
-                try{
-                    sleep(2000);
-                }
-                catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-                finally {
-                    boolean chk = checkLoggedUser();
-                    User user;
-                    if(chk){
-                        user = getUser();
-                        i.putExtra("LoggedUser",user);
-                        startActivity(i);
-                    }
-                    else {
-                        startActivity(intent);
-                        finish();
-                    }
-                }
-            }
-        }; thread.start();
+        carregar();
     }
     private boolean checkLoggedUser(){
         sp = getSharedPreferences(PREF_NAME,0);
@@ -82,5 +61,36 @@ public class Splash extends AppCompatActivity {
             usuario = new User(id,birth,country,crt,email,iddev,idlang,username,name,password,pic,type);
         }
         return usuario;
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        carregar();
+    }
+
+    public void carregar(){
+        Thread thread = new Thread(){
+            public void run(){
+                try{
+                    sleep(2000);
+                }
+                catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+                finally {
+                    boolean chk = checkLoggedUser();
+                    User user;
+                    if(chk){
+                        user = getUser();
+                        i.putExtra("LoggedUser",user);
+                        startActivity(i);
+                    }
+                    else {
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+            }
+        }; thread.start();
     }
 }

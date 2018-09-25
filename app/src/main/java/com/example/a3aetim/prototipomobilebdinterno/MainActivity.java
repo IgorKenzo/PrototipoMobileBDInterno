@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v7.preference.PreferenceManager;
 import android.transition.ChangeBounds;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     User loggedUser;
     NavigationView navigationView;
+    Bitmap img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         /*Explode explodeTransit = new Explode();
@@ -44,8 +46,11 @@ public class MainActivity extends AppCompatActivity
         //////////
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loggedUser = (User) getIntent().getSerializableExtra("LoggedUser");
-        Bitmap img = BitmapFactory.decodeByteArray(loggedUser.getPicUser(),0,loggedUser.getPicUser().length);
+        if (loggedUser == null){
+            loggedUser = (User) getIntent().getSerializableExtra("LoggedUser");
+            img = BitmapFactory.decodeByteArray(loggedUser.getPicUser(),0,loggedUser.getPicUser().length);
+        }
+
 
         RoundedBitmapDrawable imgRound = RoundedBitmapDrawableFactory.create(getResources(),img);
         imgRound.setCornerRadius(100);
