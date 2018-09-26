@@ -28,10 +28,10 @@ public class SettingsActivity extends AppCompatActivity {
     public static final String KEY_SOUND = "sound_chk";
     public static final String KEY_VIBRATION = "vibration_chk";
     public static final String KEY_LANGUAGE = "selec_lang";
-    private SettingsFragment settingsFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadLocale();
         setContentView(R.layout.activity_settings);
         if(savedInstanceState == null) {
             FragmentManager fm = getSupportFragmentManager();
@@ -56,8 +56,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-   /* private void setLocale(String lang){
+    public void setLocale(String lang){
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
         Configuration configuration = new Configuration();
@@ -72,5 +71,5 @@ public class SettingsActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences(PREF_NAME,0);
         String language = sp.getString(KEY_LANGUAGE,"");
         setLocale(language);
-    }*/
+    }
 }

@@ -23,12 +23,11 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
 
     public static class ApplicationViewHolder extends RecyclerView.ViewHolder{
         public ImageView mImageView;
-        public TextView mTitle,mDesc,mId;
+        public TextView mTitle,mDesc;
 
         public ApplicationViewHolder(final View itemView, final OnItemClickListener listener){
             super(itemView);
             mImageView = itemView.findViewById(R.id.imgvAppItemMarket);
-            mId = itemView.findViewById(R.id.txtIdAppMarket);
             mTitle = itemView.findViewById(R.id.txtTitleAppMarket);
             mDesc = itemView.findViewById(R.id.txtAppDescMarket);
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +57,6 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
     public void onBindViewHolder(@NonNull ApplicationViewHolder applicationViewHolder, int i) {
         Application currentApp = mAppList.get(i);
         //applicationViewHolder.mImageView.setImageBitmap();
-        applicationViewHolder.mId.setText(String.valueOf(currentApp.get_IdApp()));
         applicationViewHolder.mTitle.setText(currentApp.getTitle());
         applicationViewHolder.mDesc.setText("R$ "+ String.valueOf(currentApp.getPrice()));
     }
