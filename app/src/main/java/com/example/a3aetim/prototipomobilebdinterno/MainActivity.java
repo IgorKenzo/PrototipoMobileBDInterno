@@ -2,16 +2,13 @@ package com.example.a3aetim.prototipomobilebdinterno;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.support.v7.preference.PreferenceManager;
 import android.transition.ChangeBounds;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -25,11 +22,10 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.a3aetim.prototipomobilebdinterno.Classes.ImageDAO;
+import com.example.a3aetim.prototipomobilebdinterno.Classes.User;
 import com.example.a3aetim.prototipomobilebdinterno.Fragments.*;
 
-import java.util.Locale;
-
-import static com.example.a3aetim.prototipomobilebdinterno.SettingsActivity.KEY_LANGUAGE;
 import static com.example.a3aetim.prototipomobilebdinterno.Splash.PREF_NAME;
 
 
@@ -52,8 +48,8 @@ public class MainActivity extends AppCompatActivity
         }
 
         loggedUser = (User) getIntent().getSerializableExtra("LoggedUser");
-        img = BitmapFactory.decodeByteArray(loggedUser.getPicUser(),0,loggedUser.getPicUser().length);
-
+        //img = BitmapFactory.decodeByteArray(loggedUser.getPicUser(),0,loggedUser.getPicUser().length);
+        img = ImageDAO.loadImageFromStorage(loggedUser.getPicUser());
         RoundedBitmapDrawable imgRound = RoundedBitmapDrawableFactory.create(getResources(),img);
         imgRound.setCornerRadius(100);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -81,15 +77,18 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        SharedPreferences sp = getSharedPreferences(PREF_NAME,0);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString("EmailLoggedUser",loggedUser.getEmailUser());
-        editor.commit();
+      setLoggedUser();
     }
     private void openProf(){
         Intent intent = new Intent(this,ProfileActivity.class);
         intent.putExtra("ProfileUser",loggedUser);
         startActivity(intent);
+    }
+    private void setLoggedUser(){
+        SharedPreferences sp = getSharedPreferences(PREF_NAME,0);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("EmailLoggedUser",loggedUser.getEmailUser());
+        editor.commit();
     }
 
     @Override

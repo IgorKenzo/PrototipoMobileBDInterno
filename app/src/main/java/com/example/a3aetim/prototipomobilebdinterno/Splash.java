@@ -5,13 +5,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
 
-import es.dmoral.toasty.Toasty;
+import com.example.a3aetim.prototipomobilebdinterno.Classes.User;
 
 public class Splash extends AppCompatActivity {
     public static String PREF_NAME = "Preferencias";
@@ -51,7 +49,7 @@ public class Splash extends AppCompatActivity {
             String name = cursor.getString(3);
             String birth = cursor.getString(4);
             String email = emailUser;
-            byte[] pic = cursor.getBlob(6);
+            String pic = cursor.getString(6);
             int country = cursor.getInt(7);
             int type = cursor.getInt(8);
             String crt = cursor.getString(9);

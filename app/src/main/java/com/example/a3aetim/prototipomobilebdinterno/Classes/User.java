@@ -1,4 +1,4 @@
-package com.example.a3aetim.prototipomobilebdinterno;
+package com.example.a3aetim.prototipomobilebdinterno.Classes;
 
 import java.io.Serializable;
 
@@ -9,14 +9,15 @@ public class User implements Serializable {
     private String NameUser;
     private String BirthUser;
     private String EmailUser;
-    private byte[] PicUser;
+    //private byte[] PicUser;
+    private String PicUser;
     private int CountryUser;
     private int TypeUser;
     private String CrtDateUser;
     private int IdLang;
     private int IdDev;
 
-    User(){
+    public User(){
         this._IdUser = 0;
         this.BirthUser = null;
         this.CountryUser = 0;
@@ -30,7 +31,7 @@ public class User implements Serializable {
         this.PicUser=null;
         this.TypeUser=0;
     }
-    User(int id, String birthUser, int countryUser, String crtDateUser, String emailUser, int iddev, int idlang, String loginUser, String nameUser, String passUser, byte[] picUser, int typeUser){
+    public User(int id, String birthUser, int countryUser, String crtDateUser, String emailUser, int iddev, int idlang, String loginUser, String nameUser, String passUser, String picUser, int typeUser){
         this._IdUser = id;
         this.BirthUser = birthUser;
         this.CountryUser = countryUser;
@@ -81,7 +82,7 @@ public class User implements Serializable {
         return PassUser;
     }
 
-    public byte[] getPicUser() {
+    public String getPicUser() {
         return PicUser;
     }
 

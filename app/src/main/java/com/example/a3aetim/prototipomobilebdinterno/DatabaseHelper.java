@@ -13,7 +13,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE Developer(_IdDev INTEGER PRIMARY KEY AUTOINCREMENT, InfoDev TEXT, NumSoftDev INTEGER, NameDev TEXT);");
         db.execSQL("CREATE TABLE User(_IdUser INTEGER PRIMARY KEY AUTOINCREMENT, LoginUser TEXT UNIQUE, PassUser TEXT, NameUser TEXT, " +
-                   "BirthUser DATE, EmailUser TEXT, PicUser BLOB, CountryUser INTEGER, TypeUser TINYINT, CrtDateUser DATE, IdLang INTEGER, IdDev INTEGER REFERENCES Developer(_IdDev));");
+                   "BirthUser DATE, EmailUser TEXT, PicUser TEXT, CountryUser INTEGER, TypeUser TINYINT, CrtDateUser DATE, IdLang INTEGER, IdDev INTEGER REFERENCES Developer(_IdDev));");
         db.execSQL("CREATE TABLE Application(_IdApp INTEGER PRIMARY KEY AUTOINCREMENT, NameApp TEXT, VersionApp TEXT, PriceApp DECIMAL, PublisherNameApp TEXT, ReleaseDateApp DATE, ArquiveApp TEXT, " +
                     "IdDev INTEGER REFERENCES Developer(_IdDev), TypeApp INTEGER, PegiApp INTEGER);");
         db.execSQL("CREATE TABLE Comment(_IdComm INTEGER PRIMARY KEY AUTOINCREMENT, ValueComm TEXT, DateComm DATETIME, IdUser REFERENCES User(_IdUser), IdApp REFERENCES Application(_IdApp));");

@@ -29,6 +29,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
+import com.example.a3aetim.prototipomobilebdinterno.Classes.ImageDAO;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -49,7 +51,7 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
     DatabaseHelper helper;
     EditText txtName, txtEmail,txtUser, txtPass, txtBirth;
     Spinner country,lang;
-    Date crtdata;
+    String crtdata;
     int countryid,langid,PICK_IMAGE = 100;
     Button btnChoosePic;
     SimpleDateFormat df;
@@ -61,7 +63,7 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_cli);
-
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         btnChoosePic = (Button)findViewById(R.id.btnChoosePic);
 
         df = new SimpleDateFormat("dd/MM/yyyy");
@@ -86,7 +88,7 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
         //TODO: Criar um DatePickerDialog
         txtBirth = (EditText)findViewById(R.id.edtBirth);
 
-        crtdata = new Date();
+        crtdata = sdf.format(new Date());
 
         imgvArchive = (ImageView)findViewById(R.id.imgvArchive);
 
@@ -188,7 +190,8 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
     }
 
     public void cadUser(){
-        byte[] img = getBitmapAsByteArray(bitmap);
+        String img = ImageDAO.saveToInternalStorage(bitmap,this);;
+        //byte[] img = getBitmapAsByteArray(bitmap);
         countryid = country.getSelectedItemPosition();
         langid = lang.getSelectedItemPosition();
         SQLiteDatabase db = helper.getWritableDatabase();
@@ -201,7 +204,7 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
         values.put("PicUser",img);
         values.put("CountryUser",countryid);
         values.put("TypeUser",0);
-        values.put("CrtDateUser", String.valueOf(crtdata));
+        values.put("CrtDateUser",crtdata);
         values.put("IdLang",langid);
         long res = db.insert("User",null,values);
         if(res != -1){

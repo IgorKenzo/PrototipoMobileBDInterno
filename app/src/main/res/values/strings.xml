@@ -65,4 +65,5 @@
     <string name="pref_choose_language">Escolha um idioma</string>
 
     <string name="toast_work_in_progress">Estamos trabalhando para adicionar essa língua</string>
+    <string name="prof_details">Details:</string>
 </resources>

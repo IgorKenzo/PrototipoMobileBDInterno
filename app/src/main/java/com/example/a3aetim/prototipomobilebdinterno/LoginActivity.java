@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
@@ -34,15 +33,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.a3aetim.prototipomobilebdinterno.Classes.User;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
 import static android.Manifest.permission.READ_CONTACTS;
-import static com.example.a3aetim.prototipomobilebdinterno.Splash.PREF_NAME;
 
 /**
  * A login screen that offers login via email/password.
@@ -119,7 +117,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             String name = cursor.getString(3);
             String birth = cursor.getString(4);
             String email = cursor.getString(5);
-            byte[] pic = cursor.getBlob(6);
+            String pic = cursor.getString(6);
             int country = cursor.getInt(7);
             int type = cursor.getInt(8);
             String crt = cursor.getString(9);
