@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Myndie</string>
     <string name="title_activity_main">Myndie</string>
@@ -51,10 +50,15 @@
 
     <!-- Strings related to Settings -->
 
-    <string-array name="list_preference_languages">
+    <string-array name="list_languages_preferences">
         <item>Inglês</item>
         <item>Espanhol</item>
         <item>Português</item>
+    </string-array>
+    <string-array name="list_languages_values">
+        <item>en</item>
+        <item>es</item>
+        <item>pt</item>
     </string-array>
 
     <string name="pref_title_notification">Notificações</string>
@@ -66,4 +70,5 @@
     <string name="pref_choose_language">Escolha um idioma</string>
 
     <string name="toast_work_in_progress">Estamos trabalhando para adicionar essa língua</string>
+    <string name="prof_details">Details:</string>
 </resources>

@@ -50,11 +50,15 @@
     <string name="title_activity_settings">Configurations</string>
 
     <!-- Strings related to Settings -->
-
-    <string-array name="list_preference_languages">
-        <item>English</item>
-        <item>Spanish</item>
-        <item>Portuguese</item>
+    <string-array name="list_languages_preferences">
+        <item>Inglês</item>
+        <item>Espanhol</item>
+        <item>Português</item>
+    </string-array>
+    <string-array name="list_languages_values">
+        <item>en</item>
+        <item>es</item>
+        <item>pt</item>
     </string-array>
 
     <string name="pref_title_notification">Notifications</string>
@@ -66,4 +70,6 @@
     <string name="pref_choose_language">Choose a language</string>
 
     <string name="toaty_work_in_progress">We are working to add this language</string>
+    <string name="toast_work_in_progress">Work in progress</string>
+    <string name="prof_details">Details:</string>
 </resources>

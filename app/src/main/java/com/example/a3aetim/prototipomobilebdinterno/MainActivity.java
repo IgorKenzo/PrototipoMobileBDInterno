@@ -2,6 +2,7 @@ package com.example.a3aetim.prototipomobilebdinterno;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.FragmentManager;
@@ -21,10 +22,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a3aetim.prototipomobilebdinterno.Classes.ImageDAO;
 import com.example.a3aetim.prototipomobilebdinterno.Classes.User;
 import com.example.a3aetim.prototipomobilebdinterno.Fragments.*;
+
+import java.util.Locale;
 
 import static com.example.a3aetim.prototipomobilebdinterno.Splash.PREF_NAME;
 
@@ -36,8 +40,8 @@ public class MainActivity extends AppCompatActivity
     Bitmap img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        loadLocale();
         getWindow().setSharedElementExitTransition(new ChangeBounds());
-        //////////
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if(savedInstanceState == null) {
@@ -79,11 +83,19 @@ public class MainActivity extends AppCompatActivity
 
       setLoggedUser();
     }
+
+    @Override
+    public void onRestart(){
+        super.onRestart();
+        reiniciar();
+    }
+
     private void openProf(){
         Intent intent = new Intent(this,ProfileActivity.class);
         intent.putExtra("ProfileUser",loggedUser);
         startActivity(intent);
     }
+
     private void setLoggedUser(){
         SharedPreferences sp = getSharedPreferences(PREF_NAME,0);
         SharedPreferences.Editor editor = sp.edit();
@@ -160,5 +172,27 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void setLocale(String lang){
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.setLocale(locale);
+        getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
+/*        */
+    }
+
+    public void loadLocale(){
+        SharedPreferences sp = getSharedPreferences(PREF_NAME,0);
+        String language = sp.getString("lang","");
+        setLocale(language);
+    }
+
+    public void reiniciar(){
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
     }
 }

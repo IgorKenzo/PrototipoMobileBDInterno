@@ -1,8 +1,10 @@
 package com.example.a3aetim.prototipomobilebdinterno;
 
+import android.app.ActionBar;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -28,6 +30,8 @@ public class SettingsActivity extends AppCompatActivity {
     public static final String KEY_SOUND = "sound_chk";
     public static final String KEY_VIBRATION = "vibration_chk";
     public static final String KEY_LANGUAGE = "selec_lang";
+    String idiomPref="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,37 +43,48 @@ public class SettingsActivity extends AppCompatActivity {
             ft.add(R.id.FrameSettings, new SettingsFragment());
             ft.commit();
         }
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String idiomPref = sharedPref.getString(SettingsActivity.KEY_LANGUAGE, "-1");
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        Boolean switchPref = sp.getBoolean(SettingsActivity.KEY_NOT, false);
-        Boolean switchPref1 = sp.getBoolean(SettingsActivity.KEY_SOUND, false);
-        Boolean switchPref2 = sp.getBoolean(SettingsActivity.KEY_VIBRATION, false);
+        carregarValores();
 
     }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                carregarValores();
                 onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void carregarValores(){
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        idiomPref = sharedPref.getString(KEY_LANGUAGE, "-1");
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean switchPref = sp.getBoolean(SettingsActivity.KEY_NOT, false);
+        Boolean switchPref1 = sp.getBoolean(SettingsActivity.KEY_SOUND, false);
+        Boolean switchPref2 = sp.getBoolean(SettingsActivity.KEY_VIBRATION, false);
+        PreferenceManager.setDefaultValues(this, R.xml.fragment_settings, false);
+        SharedPreferences.Editor editor = getSharedPreferences(PREF_NAME,0).edit();
+        editor.putString("lang",idiomPref);
+        editor.commit();
+    }
+
+
     public void setLocale(String lang){
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
         Configuration configuration = new Configuration();
         configuration.setLocale(locale);
         getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
-
-        SharedPreferences.Editor editor = getSharedPreferences(PREF_NAME,0).edit();
-        editor.putString(KEY_LANGUAGE,lang);
-        editor.commit();
+        /*        */
     }
+
     public void loadLocale(){
         SharedPreferences sp = getSharedPreferences(PREF_NAME,0);
-        String language = sp.getString(KEY_LANGUAGE,"");
+        String language = sp.getString("lang","");
         setLocale(language);
     }
 }

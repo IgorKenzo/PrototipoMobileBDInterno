@@ -17,4 +17,8 @@
         <item name="colorControlActivated">@color/colorControlActivated</item>
         <item name="colorControlHighlight">@color/colorGray</item>
     </style>
+
+    <style name="CustomActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
 </resources>
