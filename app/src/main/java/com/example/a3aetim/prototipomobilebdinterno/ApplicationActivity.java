@@ -2,9 +2,9 @@ package com.example.a3aetim.prototipomobilebdinterno;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.Explode;
-import android.transition.Fade;
 import android.widget.TextView;
+
+import com.example.a3aetim.prototipomobilebdinterno.Classes.Application;
 
 public class ApplicationActivity extends AppCompatActivity {
     TextView mTitle,mPrice,mVersion,mDesc;

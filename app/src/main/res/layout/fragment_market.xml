@@ -1,65 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragments.MarketFragment">
+    android:orientation="vertical">
 
-        <!--<LinearLayout
-            android:id="@+id/linearLayoutMarket"
+        <EditText
+            android:id="@+id/edtSearchMarket"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="12dp"
-            android:layout_margin="5dp">
+            android:background="@drawable/edit_text_rounded"
+            android:drawableStart="@drawable/ic_search"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:focusableInTouchMode="true"
+            android:hint="@string/activity_title_item_search"
+            />
 
-            <TextView
-                android:id="@+id/lblUsu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Users:" />
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:id="@+id/linerlayouthorizontalMarketuser"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"></LinearLayout>
-            </HorizontalScrollView>
-
-            <TextView
-                android:id="@+id/lblDev"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Developers:" />
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:id="@+id/linearlayouthorizontalMarketdev"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal" />
-            </HorizontalScrollView>
-
-            <TextView
-                android:id="@+id/txtApp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Applications:" />
-
-        </LinearLayout>-->
-        <android.support.v7.widget.RecyclerView
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"
-            android:scrollbars="vertical"
-            android:id="@+id/recyclerViewMarket"
-            android:layout_marginTop="5dp"/>
-</FrameLayout>
+            tools:context=".Fragments.MarketFragment">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerViewMarket"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:padding="10dp"
+                    android:scrollbars="vertical" />
+        </FrameLayout>
+</LinearLayout>
