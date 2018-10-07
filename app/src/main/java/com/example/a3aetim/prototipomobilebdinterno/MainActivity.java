@@ -1,15 +1,19 @@
 package com.example.a3aetim.prototipomobilebdinterno;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v4.view.MenuItemCompat;
 import android.transition.ChangeBounds;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -119,6 +123,17 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        SearchManager searchManager = (SearchManager)getSystemService(Context.SEARCH_SERVICE);
+        android.support.v7.widget.SearchView searchView;
+        MenuItem menuItem = menu.findItem(R.id.search_menu);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+            searchView = (android.support.v7.widget.SearchView)menuItem.getActionView();
+        }
+        else{
+            searchView = (android.support.v7.widget.SearchView) MenuItemCompat.getActionView(menuItem);
+        }
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setQueryHint(getResources().getString(R.string.activity_title_item_search));
         return true;
     }
 
@@ -159,6 +174,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.nav_RateUs) {
+            Intent i = new Intent(this,SearchableActivity.class);
+            startActivity(i);
 
         }
         else  if (id == R.id.nav_LogOut){
