@@ -14,7 +14,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:focusableInTouchMode="true"
-            android:hint="@string/activity_title_item_search"
+            android:hint="@string/title_filter"
             />
 
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -23,7 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".Fragments.MarketFragment">
-
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerViewMarket"
                     android:layout_width="match_parent"

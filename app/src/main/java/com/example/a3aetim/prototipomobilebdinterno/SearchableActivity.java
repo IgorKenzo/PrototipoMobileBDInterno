@@ -105,18 +105,7 @@ public class SearchableActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.main,menu);
-        SearchManager searchManager = (SearchManager)getSystemService(Context.SEARCH_SERVICE);
-        android.support.v7.widget.SearchView searchView;
-        MenuItem menuItem = menu.findItem(R.id.search_menu);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
-            searchView = (android.support.v7.widget.SearchView)menuItem.getActionView();
-        }
-        else{
-            searchView = (android.support.v7.widget.SearchView) MenuItemCompat.getActionView(menuItem);
-        }
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setQueryHint(getResources().getString(R.string.activity_title_item_search));
+        getMenuInflater().inflate(R.menu.searchablemenu,menu);
         return true;
     }
     @Override
