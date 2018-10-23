@@ -1,4 +1,4 @@
-package com.example.a3aetim.prototipomobilebdinterno;
+package com.example.a3aetim.prototipomobilebdinterno.Classes;
 
 import java.io.Serializable;
 

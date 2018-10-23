@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.a3aetim.prototipomobilebdinterno.Classes.User;
+import com.example.a3aetim.prototipomobilebdinterno.helper.DatabaseHelper;
 
 public class Splash extends AppCompatActivity {
     public static String PREF_NAME = "Preferencias";

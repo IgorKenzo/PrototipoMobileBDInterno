@@ -9,7 +9,6 @@ public class User implements Serializable {
     private String NameUser;
     private String BirthUser;
     private String EmailUser;
-    //private byte[] PicUser;
     private String PicUser;
     private int CountryUser;
     private int TypeUser;

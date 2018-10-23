@@ -10,16 +10,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.example.a3aetim.prototipomobilebdinterno.Application;
+import com.example.a3aetim.prototipomobilebdinterno.Classes.Application;
 import com.example.a3aetim.prototipomobilebdinterno.ApplicationActivity;
-import com.example.a3aetim.prototipomobilebdinterno.ApplicationAdapter;
-import com.example.a3aetim.prototipomobilebdinterno.DatabaseHelper;
+import com.example.a3aetim.prototipomobilebdinterno.Adapters.ApplicationAdapter;
+import com.example.a3aetim.prototipomobilebdinterno.helper.DatabaseHelper;
 import com.example.a3aetim.prototipomobilebdinterno.R;
 
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ public class MarketFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private ApplicationAdapter mRVAdapter;
     private RecyclerView.LayoutManager mRVLManager;
+    private EditText mSearch;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +48,29 @@ public class MarketFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.recyclerViewMarket);
         mRecyclerView.setHasFixedSize(true);
         setmRecyclerView();
+        mSearch = (EditText)view.findViewById(R.id.edtSearchMarket);
+        mSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mRVAdapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         return view;
     }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
     }
 
     private void load(){
