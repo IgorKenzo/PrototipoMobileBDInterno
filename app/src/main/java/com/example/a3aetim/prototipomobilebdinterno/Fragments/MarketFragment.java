@@ -77,7 +77,7 @@ public class MarketFragment extends Fragment {
         helper = new DatabaseHelper(getActivity());
         db = helper.getReadableDatabase();
         app = new ArrayList<>();
-        mRVLManager = new LinearLayoutManager(getActivity());
+        mRVLManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
     }
     private void setmRecyclerView(){
         load();
