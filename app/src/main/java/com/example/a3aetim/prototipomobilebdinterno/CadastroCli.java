@@ -6,7 +6,6 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -15,31 +14,27 @@ import android.app.Activity;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 
 import com.example.a3aetim.prototipomobilebdinterno.Classes.ImageDAO;
+import com.example.a3aetim.prototipomobilebdinterno.helper.DatabaseHelper;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
@@ -239,9 +234,9 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
 
         ContentValues values2 =  new ContentValues();
         for(int i = 0; i<10; i++) {
-            values2.put("NameApp", "Yhe escape");
+            values2.put("NameApp", "Yhe escape"+i);
             values2.put("VersionApp", "Pré-Alpha 0.0.1");
-            values2.put("PriceApp", 133.30);
+            values2.put("PriceApp", 133.30 + i);
             values2.put("PublisherNameApp", "BG");
             values2.put("ReleaseDateApp", "08/02/2018");
             values2.put("ArquiveApp", "arquivo.rar");

@@ -1,18 +1,27 @@
-package com.example.a3aetim.prototipomobilebdinterno;
+package com.example.a3aetim.prototipomobilebdinterno.Adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.a3aetim.prototipomobilebdinterno.Classes.Application;
+import com.example.a3aetim.prototipomobilebdinterno.R;
 
-public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.ApplicationViewHolder> {
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.ApplicationViewHolder> implements Filterable{
     private ArrayList<Application> mAppList;
+    private ArrayList<Application> mFullAppList;
     private OnItemClickListener mListener;
+
 
     public interface OnItemClickListener{
         void onItemClick(View view, int position);
@@ -45,6 +54,7 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
     }
     public ApplicationAdapter(ArrayList<Application> appList){
         mAppList = appList;
+        mFullAppList = new ArrayList<>(appList);
     }
     @Override
     public ApplicationViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -65,4 +75,35 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
     public int getItemCount() {
         return mAppList.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return applicationFilter;
+    }
+    private Filter applicationFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<Application> filteredApps = new ArrayList<>();
+            if(constraint == null || constraint.equals("") || constraint.length() == 0){
+                filteredApps.addAll(mFullAppList);
+            }
+            else{
+                String filtro = constraint.toString().toLowerCase().trim();
+                for(Application app : mFullAppList){
+                    if(app.getTitle().toLowerCase().contains(filtro)){
+                        filteredApps.add(app);
+                    }
+                }
+            }
+            FilterResults filterR = new FilterResults();
+            filterR.values = filteredApps;
+            return filterR;
+        }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mAppList.clear();
+            mAppList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 }
