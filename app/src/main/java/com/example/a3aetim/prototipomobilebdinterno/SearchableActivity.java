@@ -98,8 +98,8 @@ public class SearchableActivity extends AppCompatActivity {
     public void searchHandler(Intent intent){
         if(Intent.ACTION_SEARCH.toLowerCase().equalsIgnoreCase(intent.getAction().toLowerCase())){
             String query = intent.getStringExtra(SearchManager.QUERY);
-            getApps(query);
             toolbar.setTitle(query);
+            getApps(query);
         }
     }
 
