@@ -30,9 +30,9 @@ public class MarketFragment extends Fragment {
     private DatabaseHelper helper;
     private SQLiteDatabase db;
     private ArrayList<Application> app;
-    private RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerViewNew,mRecyclerViewPromo,mRecyclerViewAvaliation;
     private ApplicationAdapter mRVAdapter;
-    private RecyclerView.LayoutManager mRVLManager;
+    private RecyclerView.LayoutManager mRVLManager,mRVLManagerPromo,mRVLManagerAvaliation;
     private EditText mSearch;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,8 +45,14 @@ public class MarketFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_market, container, false);
         view.findViewById(R.id.recyclerViewMarket);
-        mRecyclerView = view.findViewById(R.id.recyclerViewMarket);
-        mRecyclerView.setHasFixedSize(true);
+        mRecyclerViewNew = view.findViewById(R.id.recyclerViewMarket);
+        mRecyclerViewNew.setHasFixedSize(true);
+        ///
+        mRecyclerViewPromo = view.findViewById(R.id.recyclerViewMarketPromo);
+        mRecyclerViewPromo.setHasFixedSize(true);
+        ///
+        mRecyclerViewAvaliation = view.findViewById(R.id.recyclerViewMarketAvaliation);
+        mRecyclerViewAvaliation.setHasFixedSize(true);
         setmRecyclerView();
         mSearch = (EditText)view.findViewById(R.id.edtSearchMarket);
         mSearch.addTextChangedListener(new TextWatcher() {
@@ -77,14 +83,20 @@ public class MarketFragment extends Fragment {
         helper = new DatabaseHelper(getActivity());
         db = helper.getReadableDatabase();
         app = new ArrayList<>();
-        mRVLManager = new LinearLayoutManager(getActivity());
+        mRVLManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        mRVLManagerPromo = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        mRVLManagerAvaliation = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
     }
     private void setmRecyclerView(){
         load();
         getApps();
         mRVAdapter = new ApplicationAdapter(app);
-        mRecyclerView.setLayoutManager(mRVLManager);
-        mRecyclerView.setAdapter(mRVAdapter);
+        mRecyclerViewNew.setLayoutManager(mRVLManager);
+        mRecyclerViewNew.setAdapter(mRVAdapter);
+        mRecyclerViewPromo.setLayoutManager(mRVLManagerPromo);
+        mRecyclerViewPromo.setAdapter(mRVAdapter);
+        mRecyclerViewAvaliation.setLayoutManager(mRVLManagerAvaliation);
+        mRecyclerViewAvaliation.setAdapter(mRVAdapter);
 
         mRVAdapter.setOnitemClickListener(new ApplicationAdapter.OnItemClickListener() {
             @Override
