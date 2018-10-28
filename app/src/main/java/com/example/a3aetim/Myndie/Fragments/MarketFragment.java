@@ -1,4 +1,4 @@
-package com.example.a3aetim.prototipomobilebdinterno.Fragments;
+package com.example.a3aetim.Myndie.Fragments;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,11 +18,11 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.example.a3aetim.prototipomobilebdinterno.Classes.Application;
-import com.example.a3aetim.prototipomobilebdinterno.ApplicationActivity;
-import com.example.a3aetim.prototipomobilebdinterno.Adapters.ApplicationAdapter;
-import com.example.a3aetim.prototipomobilebdinterno.helper.DatabaseHelper;
-import com.example.a3aetim.prototipomobilebdinterno.R;
+import com.example.a3aetim.Myndie.Classes.Application;
+import com.example.a3aetim.Myndie.ApplicationActivity;
+import com.example.a3aetim.Myndie.Adapters.ApplicationAdapter;
+import com.example.a3aetim.Myndie.helper.DatabaseHelper;
+import com.example.a3aetim.Myndie.R;
 
 import java.util.ArrayList;
 

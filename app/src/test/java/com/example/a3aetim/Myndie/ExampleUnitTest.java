@@ -1,4 +1,4 @@
-package com.example.a3aetim.prototipomobilebdinterno;
+package com.example.a3aetim.Myndie;
 
 import org.junit.Test;
 

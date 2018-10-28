@@ -1,4 +1,4 @@
-package com.example.a3aetim.prototipomobilebdinterno;
+package com.example.a3aetim.Myndie;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -12,7 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.a3aetim.prototipomobilebdinterno.Classes.Application;
+import com.example.a3aetim.Myndie.Classes.Application;
 
 public class ApplicationActivity extends AppCompatActivity {
     TextView mTitle,mPrice,mVersion,mDesc;

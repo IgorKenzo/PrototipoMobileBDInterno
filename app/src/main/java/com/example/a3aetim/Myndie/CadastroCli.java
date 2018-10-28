@@ -1,4 +1,4 @@
-package com.example.a3aetim.prototipomobilebdinterno;
+package com.example.a3aetim.Myndie;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -25,8 +25,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
-import com.example.a3aetim.prototipomobilebdinterno.Classes.ImageDAO;
-import com.example.a3aetim.prototipomobilebdinterno.helper.DatabaseHelper;
+import com.example.a3aetim.Myndie.Classes.ImageDAO;
+import com.example.a3aetim.Myndie.helper.DatabaseHelper;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.example.a3aetim.prototipomobilebdinterno;
+package com.example.a3aetim.Myndie;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -33,8 +33,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.a3aetim.prototipomobilebdinterno.Classes.User;
-import com.example.a3aetim.prototipomobilebdinterno.helper.DatabaseHelper;
+import com.example.a3aetim.Myndie.Classes.User;
+import com.example.a3aetim.Myndie.helper.DatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;

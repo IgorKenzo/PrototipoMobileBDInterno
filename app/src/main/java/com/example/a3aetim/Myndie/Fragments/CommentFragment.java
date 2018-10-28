@@ -1,4 +1,4 @@
-package com.example.a3aetim.prototipomobilebdinterno.Fragments;
+package com.example.a3aetim.Myndie.Fragments;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.a3aetim.prototipomobilebdinterno.R;
+import com.example.a3aetim.Myndie.R;
 
 
 public class CommentFragment extends Fragment {

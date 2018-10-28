@@ -1,4 +1,4 @@
-package com.example.a3aetim.prototipomobilebdinterno;
+package com.example.a3aetim.Myndie;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,8 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a3aetim.prototipomobilebdinterno.Classes.ImageDAO;
-import com.example.a3aetim.prototipomobilebdinterno.Classes.User;
+import com.example.a3aetim.Myndie.Classes.ImageDAO;
+import com.example.a3aetim.Myndie.Classes.User;
 
 import es.dmoral.toasty.Toasty;
 

@@ -1,4 +1,4 @@
-package com.example.a3aetim.prototipomobilebdinterno;
+package com.example.a3aetim.Myndie;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -20,9 +20,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.example.a3aetim.prototipomobilebdinterno.Adapters.ApplicationAdapter;
-import com.example.a3aetim.prototipomobilebdinterno.Classes.Application;
-import com.example.a3aetim.prototipomobilebdinterno.helper.DatabaseHelper;
+import com.example.a3aetim.Myndie.Adapters.ApplicationAdapter;
+import com.example.a3aetim.Myndie.Classes.Application;
+import com.example.a3aetim.Myndie.helper.DatabaseHelper;
 
 import java.util.ArrayList;
 

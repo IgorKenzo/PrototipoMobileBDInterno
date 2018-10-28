@@ -16,6 +16,7 @@
         <item name="android:textColorSecondary">@color/colorGray</item>
         <item name="colorControlActivated">@color/colorControlActivated</item>
         <item name="colorControlHighlight">@color/colorGray</item>
+        <item name="android:fontFamily">@font/roboto_mono_thin</item>
     </style>
 
     <style name="CustomActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">

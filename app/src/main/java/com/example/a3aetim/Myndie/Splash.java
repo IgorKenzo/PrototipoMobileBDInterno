@@ -1,4 +1,4 @@
-package com.example.a3aetim.prototipomobilebdinterno;
+package com.example.a3aetim.Myndie;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,8 +9,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.a3aetim.prototipomobilebdinterno.Classes.User;
-import com.example.a3aetim.prototipomobilebdinterno.helper.DatabaseHelper;
+import com.example.a3aetim.Myndie.Classes.User;
+import com.example.a3aetim.Myndie.helper.DatabaseHelper;
 
 public class Splash extends AppCompatActivity {
     public static String PREF_NAME = "Preferencias";

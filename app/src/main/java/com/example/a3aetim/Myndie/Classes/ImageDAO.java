@@ -1,4 +1,4 @@
-package com.example.a3aetim.prototipomobilebdinterno.Classes;
+package com.example.a3aetim.Myndie.Classes;
 
 import android.content.Context;
 import android.content.ContextWrapper;

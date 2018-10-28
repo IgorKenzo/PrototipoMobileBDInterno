@@ -1,4 +1,4 @@
-package com.example.a3aetim.prototipomobilebdinterno;
+package com.example.a3aetim.Myndie;
 
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -9,11 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 import android.view.MenuItem;
 
-import com.example.a3aetim.prototipomobilebdinterno.Fragments.SettingsFragment;
+import com.example.a3aetim.Myndie.Fragments.SettingsFragment;
 
 import java.util.Locale;
 
-import static com.example.a3aetim.prototipomobilebdinterno.Splash.PREF_NAME;
+import static com.example.a3aetim.Myndie.Splash.PREF_NAME;
 
 public class SettingsActivity extends AppCompatActivity {
     public static final String KEY_NOT = "notification_chk";

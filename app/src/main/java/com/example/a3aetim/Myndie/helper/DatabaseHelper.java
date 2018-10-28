@@ -1,4 +1,4 @@
-package com.example.a3aetim.prototipomobilebdinterno.helper;
+package com.example.a3aetim.Myndie.helper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -1,4 +1,4 @@
-package com.example.a3aetim.prototipomobilebdinterno.Adapters;
+package com.example.a3aetim.Myndie.Adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +10,8 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.a3aetim.prototipomobilebdinterno.Classes.Application;
-import com.example.a3aetim.prototipomobilebdinterno.R;
+import com.example.a3aetim.Myndie.Classes.Application;
+import com.example.a3aetim.Myndie.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +58,8 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
     }
     @Override
     public ApplicationViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.app_item,viewGroup,false);
+        //View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.app_item,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,viewGroup,false);
         ApplicationViewHolder avh = new ApplicationViewHolder(view,mListener);
         return avh;
     }
