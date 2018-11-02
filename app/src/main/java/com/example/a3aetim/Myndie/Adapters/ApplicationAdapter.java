@@ -58,8 +58,7 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
     }
     @Override
     public ApplicationViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        //View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.app_item,viewGroup,false);
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.app_item,viewGroup,false);
         ApplicationViewHolder avh = new ApplicationViewHolder(view,mListener);
         return avh;
     }
