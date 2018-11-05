@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.a3aetim.Myndie.Adapters.BackAppAdapter;
 import com.example.a3aetim.Myndie.Classes.Application;
 import com.example.a3aetim.Myndie.ApplicationActivity;
 import com.example.a3aetim.Myndie.Adapters.ApplicationAdapter;
@@ -30,9 +31,11 @@ public class MarketFragment extends Fragment {
     private DatabaseHelper helper;
     private SQLiteDatabase db;
     private ArrayList<Application> app;
+    private ArrayList<String> fundoNew,fundoPromo,fundoAvaliation;
     private RecyclerView mRecyclerViewNew,mRecyclerViewPromo,mRecyclerViewAvaliation;
     private ApplicationAdapter mRVAdapter;
-    private RecyclerView.LayoutManager mRVLManager,mRVLManagerPromo,mRVLManagerAvaliation;
+    private BackAppAdapter mBackAdapterNew,mBackAdapterPromo,mBackAdapterAvaliation;
+    private RecyclerView.LayoutManager mRVLManagerNew,mRVLManagerPromo,mRVLManagerAvaliation,mRVLManagerFundoNew,mRVLManagerFundoPromo,mRVLManagerFundoAvaliation;
     private EditText mSearch;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,9 @@ public class MarketFragment extends Fragment {
         ///
         mRecyclerViewAvaliation = view.findViewById(R.id.recyclerViewMarketAvaliation);
         mRecyclerViewAvaliation.setHasFixedSize(true);
-        setmRecyclerView();
+        setmRecyclerViewNew();
+        setmRecyclerViewPromo();
+        setmRecyclerViewAvaliation();
         mSearch = (EditText)view.findViewById(R.id.edtSearchMarket);
         mSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -83,20 +88,63 @@ public class MarketFragment extends Fragment {
         helper = new DatabaseHelper(getActivity());
         db = helper.getReadableDatabase();
         app = new ArrayList<>();
-        mRVLManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        fundoNew = new ArrayList<String>();
+        fundoNew.add("Novos");
+        fundoPromo = new ArrayList<String>();
+        fundoPromo.add("Em Promoção");
+        fundoAvaliation = new ArrayList<String>();
+        fundoAvaliation.add("Melhores Avaliados");
+        mRVLManagerNew = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         mRVLManagerPromo = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         mRVLManagerAvaliation = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        mRVLManagerFundoNew = new LinearLayoutManager(getActivity());
+        mRVLManagerFundoPromo = new LinearLayoutManager(getActivity());
+        mRVLManagerFundoAvaliation = new LinearLayoutManager(getActivity());
     }
-    private void setmRecyclerView(){
+    private void setmRecyclerViewNew(){
         load();
         getApps();
         mRVAdapter = new ApplicationAdapter(app);
-        mRecyclerViewNew.setLayoutManager(mRVLManager);
-        mRecyclerViewNew.setAdapter(mRVAdapter);
-        mRecyclerViewPromo.setLayoutManager(mRVLManagerPromo);
-        mRecyclerViewPromo.setAdapter(mRVAdapter);
-        mRecyclerViewAvaliation.setLayoutManager(mRVLManagerAvaliation);
-        mRecyclerViewAvaliation.setAdapter(mRVAdapter);
+        mBackAdapterNew = new BackAppAdapter(fundoNew,mRVAdapter,mRVLManagerNew);
+        //Define quadro que fica atrás dos apps
+        mRecyclerViewNew.setLayoutManager(mRVLManagerFundoNew);
+        mRecyclerViewNew.setAdapter(mBackAdapterNew);
+
+        mRVAdapter.setOnitemClickListener(new ApplicationAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view,int position) {
+                Intent i = new Intent(getContext(),ApplicationActivity.class);
+                i.putExtra("App",app.get(position));
+                ImageView mImgvApp = (ImageView)view.findViewById(R.id.imgvAppItemMarket);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), Pair.<View, String>create(mImgvApp,"AppTransition"));
+                startActivity(i,options.toBundle());
+            }
+        });
+    }
+    private void setmRecyclerViewPromo(){
+        mRVAdapter = new ApplicationAdapter(app);
+        mBackAdapterPromo = new BackAppAdapter(fundoPromo,mRVAdapter,mRVLManagerPromo);
+        //Define quadro que fica atrás dos apps
+        mRecyclerViewPromo.setLayoutManager(mRVLManagerFundoPromo);
+        mRecyclerViewPromo.setAdapter(mBackAdapterPromo);
+
+        mRVAdapter.setOnitemClickListener(new ApplicationAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view,int position) {
+                Intent i = new Intent(getContext(),ApplicationActivity.class);
+                i.putExtra("App",app.get(position));
+                ImageView mImgvApp = (ImageView)view.findViewById(R.id.imgvAppItemMarket);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), Pair.<View, String>create(mImgvApp,"AppTransition"));
+                startActivity(i,options.toBundle());
+            }
+        });
+    }
+    private void setmRecyclerViewAvaliation(){
+        mRVAdapter = new ApplicationAdapter(app);
+        mBackAdapterAvaliation = new BackAppAdapter(fundoAvaliation,mRVAdapter,mRVLManagerAvaliation);
+        //Define quadro que fica atrás dos apps
+        mRecyclerViewAvaliation.setLayoutManager(mRVLManagerFundoAvaliation);
+        mRecyclerViewAvaliation.setAdapter(mBackAdapterAvaliation);
 
         mRVAdapter.setOnitemClickListener(new ApplicationAdapter.OnItemClickListener() {
             @Override

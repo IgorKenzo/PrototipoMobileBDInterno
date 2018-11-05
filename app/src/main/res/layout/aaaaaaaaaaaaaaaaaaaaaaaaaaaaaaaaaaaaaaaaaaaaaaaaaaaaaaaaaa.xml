@@ -1,45 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_margin="5dp"
     android:layout_marginTop="5dp"
-    app:cardBackgroundColor="#2c393939"
-    android:layout_margin="5dp">
-   <!-- app:cardCornerRadius="15dp"-->
+    app:cardBackgroundColor="#2c393939">
 
     <RelativeLayout
-        android:layout_width="180dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imgvAppItemMarket"
+        <TextView
+            android:id="@+id/txtTituloQuadro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/RecyclerViewBase"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="156dp"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/myndieicon"
-            android:transitionName="AppTransition" />
-
-        <TextView
-            android:id="@+id/txtTitleAppMarket"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/imgvAppItemMarket"
-            android:fontFamily="@font/roboto"
-            android:text="dddd" />
-
-        <TextView
-            android:id="@+id/txtAppDescMarket"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="129dp"
-            android:fontFamily="@font/roboto_mono_thin"
-            android:text="dddd"
-            android:textStyle="bold" />
+            android:layout_marginBottom="6dp" />
     </RelativeLayout>
 
 </android.support.design.card.MaterialCardView>
