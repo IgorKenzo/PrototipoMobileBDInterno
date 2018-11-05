@@ -73,4 +73,7 @@
     <string name="toaty_work_in_progress">We are working to add this language</string>
     <string name="toast_work_in_progress">Work in progress</string>
     <string name="prof_details">Details:</string>
+    <string name="market_base_new">New</string>
+    <string name="market_base_promo">Promotion</string>
+    <string name="market_base_avaliated">Most Avaliated</string>
 </resources>

@@ -1,7 +1,9 @@
 package com.example.a3aetim.Myndie;
 
+import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -26,6 +28,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -35,6 +38,7 @@ import com.example.a3aetim.Myndie.Classes.ImageDAO;
 import com.example.a3aetim.Myndie.Classes.User;
 import com.example.a3aetim.Myndie.Fragments.*;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import static com.example.a3aetim.Myndie.Splash.PREF_NAME;
@@ -140,9 +144,22 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        if(id==R.id.filter_apps){
+            callFilterAlert();
+        }
         return super.onOptionsItemSelected(item);
     }
-
+    private void callFilterAlert() {
+        String[] cat = new String[]{"-Nenhuma-","Jogos","Utilitários"};
+        new AlertDialog.Builder(this,R.style.CustomAlertDialog)
+                .setTitle("Escolha uma categoria")
+                .setSingleChoiceItems(cat,0, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // The 'which' argument contains the index position
+                        // of the selected item
+                    }})
+                .show();
+    }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -198,7 +215,6 @@ public class MainActivity extends AppCompatActivity
         Configuration configuration = new Configuration();
         configuration.setLocale(locale);
         getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
-/*        */
     }
 
     public void loadLocale(){

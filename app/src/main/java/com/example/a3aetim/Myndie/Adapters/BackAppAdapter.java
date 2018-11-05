@@ -54,7 +54,7 @@ public class BackAppAdapter extends RecyclerView.Adapter<BackAppAdapter.Applicat
     }
     @Override
     public BackAppAdapter.ApplicationViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.backapp,viewGroup,false);
         BackAppAdapter.ApplicationViewHolder avh = new BackAppAdapter.ApplicationViewHolder(view,mListener);
         return avh;
     }

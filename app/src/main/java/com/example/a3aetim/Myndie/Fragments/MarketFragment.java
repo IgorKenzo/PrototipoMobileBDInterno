@@ -1,5 +1,7 @@
 package com.example.a3aetim.Myndie.Fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,10 +15,15 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.a3aetim.Myndie.Adapters.BackAppAdapter;
 import com.example.a3aetim.Myndie.Classes.Application;
@@ -89,11 +96,11 @@ public class MarketFragment extends Fragment {
         db = helper.getReadableDatabase();
         app = new ArrayList<>();
         fundoNew = new ArrayList<String>();
-        fundoNew.add("Novos");
+        fundoNew.add(getResources().getString(R.string.market_base_new));
         fundoPromo = new ArrayList<String>();
-        fundoPromo.add("Em Promoção");
+        fundoPromo.add(getResources().getString(R.string.market_base_promo));
         fundoAvaliation = new ArrayList<String>();
-        fundoAvaliation.add("Melhores Avaliados");
+        fundoAvaliation.add(getResources().getString(R.string.market_base_avaliated));
         mRVLManagerNew = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         mRVLManagerPromo = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         mRVLManagerAvaliation = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
