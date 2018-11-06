@@ -1,7 +1,5 @@
 package com.example.a3aetim.Myndie.Fragments;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,22 +13,17 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.a3aetim.Myndie.Adapters.BackAppAdapter;
-import com.example.a3aetim.Myndie.Classes.Application;
-import com.example.a3aetim.Myndie.ApplicationActivity;
 import com.example.a3aetim.Myndie.Adapters.ApplicationAdapter;
-import com.example.a3aetim.Myndie.helper.DatabaseHelper;
+import com.example.a3aetim.Myndie.Adapters.BackAppAdapter;
+import com.example.a3aetim.Myndie.ApplicationActivity;
+import com.example.a3aetim.Myndie.Classes.Application;
 import com.example.a3aetim.Myndie.R;
+import com.example.a3aetim.Myndie.helper.DatabaseHelper;
 
 import java.util.ArrayList;
 
@@ -75,7 +68,7 @@ public class MarketFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mRVAdapter.getFilter().filter(s);
+                mBackAdapterNew.setAppFilter(s);
             }
 
             @Override
@@ -88,7 +81,6 @@ public class MarketFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
     }
 
     private void load(){

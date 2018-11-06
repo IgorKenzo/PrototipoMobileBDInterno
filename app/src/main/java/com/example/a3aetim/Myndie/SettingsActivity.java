@@ -34,7 +34,6 @@ public class SettingsActivity extends AppCompatActivity {
             ft.commit();
         }
         carregarValores();
-
     }
 
 
