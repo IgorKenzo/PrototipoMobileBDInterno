@@ -24,6 +24,7 @@ import com.example.a3aetim.Myndie.Adapters.ApplicationAdapter;
 import com.example.a3aetim.Myndie.Classes.Application;
 import com.example.a3aetim.Myndie.helper.DatabaseHelper;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class SearchableActivity extends AppCompatActivity {
@@ -80,17 +81,21 @@ public class SearchableActivity extends AppCompatActivity {
     }
 
     private void getApps(String queryNome){
-        Cursor cursorapp = db.rawQuery("SELECT _IdApp, NameApp, PriceApp,VersionApp from Application WHERE NameApp LIKE '%"+ queryNome+"%'", null);
+        Cursor cursorapp = db.rawQuery("SELECT _IdApp, NameApp, PriceApp,VersionApp, PublisherNameApp, ReleaseDateApp, DescApp from Application WHERE NameApp LIKE '%"+ queryNome+"%'", null);
         int idapp;
-        String nameapp,version;
+        String nameapp,version, publisher, desc;
         double preco;
+        String releasedate;
         cursorapp.moveToFirst();
         for (int j = 0; j < cursorapp.getCount(); j++) {
             idapp = cursorapp.getInt(0);
             nameapp = cursorapp.getString(1);
             preco = cursorapp.getDouble(2);
             version = cursorapp.getString(3);
-            app.add(new Application(idapp,nameapp,preco,version));
+            publisher = cursorapp.getString(4);
+            releasedate = cursorapp.getString(5);
+            desc = cursorapp.getString(6);
+            app.add(new Application(idapp,nameapp,preco,version,desc,publisher,releasedate));
             cursorapp.moveToNext();
         }
         cursorapp.close();

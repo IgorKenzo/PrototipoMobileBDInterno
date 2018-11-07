@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.a3aetim.Myndie.Classes.Application;
 
 public class ApplicationActivity extends AppCompatActivity {
-    TextView mTitle,mPrice,mVersion,mDesc;
+    TextView mTitle,mPrice,mVersion,mDesc, mPublisherName, mReleaseDate;
     Application app;
     private Toolbar toolbar;
     @Override
@@ -27,10 +27,14 @@ public class ApplicationActivity extends AppCompatActivity {
         mTitle =(TextView)findViewById(R.id.txtTitleApp);
         mVersion =(TextView)findViewById(R.id.txtVersionApp);
         mDesc =(TextView)findViewById(R.id.txtDescApp);
+        mPublisherName = (TextView)findViewById(R.id.txtPublisherNameApp);
+        mReleaseDate = (TextView)findViewById(R.id.txtReleaseDateApp);
         mTitle.setText(app.getTitle());
         mVersion.setText(app.getVersion());
+        mPublisherName.setText(app.getPublisherName());
+        mReleaseDate.setText(String.valueOf(app.getReleaseDate()));
         mPrice.setText("R$ "+String.valueOf(app.getPrice()));
-        mDesc.setText("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"+String.valueOf(app.get_IdApp()));
+        mDesc.setText("Aqui irá uma breve descrição do aplicativo"+String.valueOf(app.get_IdApp()));
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

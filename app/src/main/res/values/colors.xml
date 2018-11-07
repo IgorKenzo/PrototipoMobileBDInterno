@@ -8,4 +8,5 @@
     <color name="colorAccent">#ffffff</color>
     <color name="colorGray">#bcbcbc</color>
     <color name="colorControlActivated">#934bf1</color>
+    <color name="colorTransparent">#232323</color>
 </resources>
