@@ -35,7 +35,6 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustPan|adjustNothing"/>
         <activity
             android:name=".LoginActivity"
