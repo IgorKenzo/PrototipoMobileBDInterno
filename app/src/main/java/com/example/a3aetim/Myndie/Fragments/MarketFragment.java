@@ -60,7 +60,7 @@ public class MarketFragment extends Fragment {
         setmRecyclerViewNew();
         setmRecyclerViewPromo();
         setmRecyclerViewAvaliation();
-        mSearch = (EditText)view.findViewById(R.id.edtSearchMarket);
+       /* mSearch = (EditText)view.findViewById(R.id.edtSearchMarket);
         mSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -76,7 +76,7 @@ public class MarketFragment extends Fragment {
             public void afterTextChanged(Editable s) {
 
             }
-        });
+        });*/
         return view;
     }
     @Override
