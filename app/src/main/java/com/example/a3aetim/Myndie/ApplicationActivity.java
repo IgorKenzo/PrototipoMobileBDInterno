@@ -97,7 +97,7 @@ public class ApplicationActivity extends AppCompatActivity implements BaseSlider
             mSlider.addSlider(textSliderView);
         }
 
-        mSlider.setPresetTransformer(SliderLayout.Transformer.Fade);
+        mSlider.setPresetTransformer(SliderLayout.Transformer.Default);
         mSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mSlider.stopAutoCycle(); //Ele não fica rodando sozinho
         //mSlider.setCustomAnimation(new DescriptionAnimation());
