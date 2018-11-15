@@ -34,15 +34,18 @@ public class SettingsActivity extends AppCompatActivity {
             ft.commit();
         }
         carregarValores();
-
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        carregarValores();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                carregarValores();
                 onBackPressed();
                 return true;
         }

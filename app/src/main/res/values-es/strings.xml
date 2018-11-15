@@ -52,8 +52,8 @@
     <!-- Strings related to Settings -->
 
     <string-array name="list_languages_preferences">
-        <item>Inglês</item>
-        <item>Espanhol</item>
+        <item>English</item>
+        <item>Español</item>
         <item>Português</item>
     </string-array>
     <string-array name="list_languages_values">

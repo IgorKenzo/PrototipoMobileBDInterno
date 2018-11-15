@@ -47,7 +47,7 @@
 
     <string name="title_activity_cadastro_cli">Cadastro</string>
     <string name="title_activity_settings">Configurações</string>
-
+    <string name="title_filter">Filter</string>
     <!-- Strings related to Settings -->
 
     <string-array name="list_languages_preferences">

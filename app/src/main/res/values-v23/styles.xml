@@ -17,6 +17,7 @@
         <item name="colorControlActivated">@color/colorControlActivated</item>
         <item name="colorControlHighlight">@color/colorGray</item>
         <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:navigationBarColor">@color/colorTransparent</item>
     </style>
 
     <style name="CustomActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">

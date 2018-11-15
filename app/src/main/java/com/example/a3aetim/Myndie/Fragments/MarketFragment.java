@@ -1,7 +1,5 @@
 package com.example.a3aetim.Myndie.Fragments;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,23 +13,19 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.a3aetim.Myndie.Adapters.BackAppAdapter;
-import com.example.a3aetim.Myndie.Classes.Application;
-import com.example.a3aetim.Myndie.ApplicationActivity;
 import com.example.a3aetim.Myndie.Adapters.ApplicationAdapter;
-import com.example.a3aetim.Myndie.helper.DatabaseHelper;
+import com.example.a3aetim.Myndie.Adapters.BackAppAdapter;
+import com.example.a3aetim.Myndie.ApplicationActivity;
+import com.example.a3aetim.Myndie.Classes.Application;
 import com.example.a3aetim.Myndie.R;
+import com.example.a3aetim.Myndie.helper.DatabaseHelper;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class MarketFragment extends Fragment {
@@ -66,7 +60,7 @@ public class MarketFragment extends Fragment {
         setmRecyclerViewNew();
         setmRecyclerViewPromo();
         setmRecyclerViewAvaliation();
-        mSearch = (EditText)view.findViewById(R.id.edtSearchMarket);
+       /* mSearch = (EditText)view.findViewById(R.id.edtSearchMarket);
         mSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -75,20 +69,19 @@ public class MarketFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mRVAdapter.getFilter().filter(s);
+                mBackAdapterNew.setAppFilter(s);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
 
             }
-        });
+        });*/
         return view;
     }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
     }
 
     private void load(){
@@ -166,17 +159,21 @@ public class MarketFragment extends Fragment {
     }
 
     private void getApps(){
-        Cursor cursorapp = db.rawQuery("SELECT _IdApp, NameApp, PriceApp,VersionApp from Application", null);
+        Cursor cursorapp = db.rawQuery("SELECT _IdApp, NameApp, PriceApp,VersionApp, PublisherNameApp, ReleaseDateApp, DescApp from Application", null);
         int idapp;
-        String nameapp,version;
+        String nameapp,version, publisher, desc;
         double preco;
+        String releasedate;
         cursorapp.moveToFirst();
         for (int j = 0; j < cursorapp.getCount(); j++) {
             idapp = cursorapp.getInt(0);
             nameapp = cursorapp.getString(1);
             preco = cursorapp.getDouble(2);
             version = cursorapp.getString(3);
-            app.add(new Application(idapp,nameapp,preco,version));
+            publisher = cursorapp.getString(4);
+            releasedate = cursorapp.getString(5);
+            desc = cursorapp.getString(6);
+            app.add(new Application(idapp,nameapp,preco,version,desc,publisher,releasedate));
             cursorapp.moveToNext();
         }
         cursorapp.close();
