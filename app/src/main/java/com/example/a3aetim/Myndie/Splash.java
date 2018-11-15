@@ -82,6 +82,7 @@ public class Splash extends AppCompatActivity {
                     if(chk){
                         user = getUser();
                         i.putExtra("LoggedUser",user);
+                        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(i);
                     }
                     else {

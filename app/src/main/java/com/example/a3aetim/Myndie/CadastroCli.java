@@ -240,6 +240,7 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
             values2.put("PublisherNameApp", "BG");
             values2.put("ReleaseDateApp", "08/02/2018");
             values2.put("ArquiveApp", "arquivo.rar");
+            values2.put("DescApp","Descrição teste aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             values2.put("IdDev", 1);
             values2.put("TypeApp", 1);
             values2.put("PegiApp", 2);

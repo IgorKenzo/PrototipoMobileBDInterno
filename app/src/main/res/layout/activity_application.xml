@@ -42,15 +42,17 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="300dp">
 
-                <TextView
+                <com.sysdata.widget.accordion.FancyAccordionView
                     android:id="@+id/txtDescApp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txtTitleApp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="0dp"
-                    android:layout_marginLeft="16dp"
-                    android:text="Outras informações" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:descendantFocusability="beforeDescendants"
+                    android:fadingEdgeLength="0dp"
+                    android:scrollbarStyle="outsideOverlay"
+                    android:scrollbars="vertical"
+                    android:splitMotionEvents="false"
+                    tools:listitem="@layout/layout_collapsed" />
 
                 <TextView
                     android:id="@+id/txtVersionApp"

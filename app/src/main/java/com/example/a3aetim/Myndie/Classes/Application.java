@@ -1,9 +1,13 @@
 package com.example.a3aetim.Myndie.Classes;
 
+import android.content.ClipData;
+
+import com.sysdata.widget.accordion.Item;
+
 import java.io.Serializable;
 import java.util.Date;
 
-public class Application implements Serializable{
+public class Application extends Item implements Serializable{
     private int _IdApp;
     private String Title;
     private double Price;
@@ -20,6 +24,16 @@ public class Application implements Serializable{
         Version = ver;
         PublisherName = publisher;
         ReleaseDate = releasedate;
+    }
+
+    public Application(Application app){
+        _IdApp = app._IdApp;
+        Title = app.Title;
+        Price = app.Price;
+        Description = app.Description;
+        Version = app.Version;
+        PublisherName = app.PublisherName;
+        ReleaseDate = app.ReleaseDate;
     }
 
     public int get_IdApp() {
@@ -45,4 +59,9 @@ public class Application implements Serializable{
     public String getReleaseDate(){return ReleaseDate;}
 
     public String getPublisherName(){return PublisherName; }
+
+    @Override
+    public int getUniqueId() {
+        return get_IdApp();
+    }
 }

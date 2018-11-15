@@ -129,6 +129,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         Intent i = new Intent(this, MainActivity.class);
         i.putExtra("LoggedUser",usuario);
         startActivity(i);
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         finish();
     }
 
