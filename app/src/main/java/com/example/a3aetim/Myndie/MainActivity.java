@@ -179,16 +179,20 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.frameContentMain, new CommentFragment());
             ft.commit();
-        } else if (id == R.id.nav_Discussions) {
+        } /*else if (id == R.id.nav_Discussions) {
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.frameContentMain, new DiscussionFragment());
             ft.commit();
 
-        } else if (id == R.id.nav_Confing) {
+        } */else if (id == R.id.nav_Confing) {
             Intent i = new Intent(this,SettingsActivity.class);
             startActivity(i);
-
+           /* FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.frameContentMain, new SettingsFragment());
+            ft.commit();
+*/
         } else if (id == R.id.nav_RateUs) {
             final String appName = "Myndie";
             try {
@@ -198,17 +202,19 @@ public class MainActivity extends AppCompatActivity
             }
 
         }
-        else  if (id == R.id.nav_LogOut){
-            SharedPreferences sp = getSharedPreferences(PREF_NAME,0);
-            SharedPreferences.Editor editor = sp.edit();
-            editor.putString("EmailLoggedUser","");
-            editor.commit();
-            finish();
-        }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void logOut(View view){
+        SharedPreferences sp = getSharedPreferences(PREF_NAME,0);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("EmailLoggedUser","");
+        editor.commit();
+        finish();
     }
 
     public void setLocale(String lang){

@@ -21,6 +21,30 @@
         android:fitsSystemWindows="true"
         app:itemTextColor="@color/colorText"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
+        app:menu="@menu/activity_main_drawer"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:onClick="logOut">
+        <TextView
+            android:id="@+id/nav_LogOut"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="100dp"
+            android:text="Logout"
+            android:drawableLeft="@drawable/ic_exit_to_app_black_24dp"
+            />
+    </LinearLayout>
+    </android.support.design.widget.NavigationView>
+
+
+
+
 
 </android.support.v4.widget.DrawerLayout>

@@ -11,7 +11,8 @@
             android:checked="true"/>
         <item
             android:id="@+id/nav_Avaliation"
-            android:title="@string/activity_title_item_avaliations" />
+            android:title="@string/activity_title_item_avaliations"
+            />
         <item
             android:id="@+id/nav_Discussions"
             android:title="@string/activity_title_item_discussions"/>

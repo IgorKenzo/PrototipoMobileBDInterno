@@ -5,11 +5,12 @@
     android:layout_height="200dp"
     android:layout_margin="5dp"
     android:layout_marginTop="5dp"
-    app:cardBackgroundColor="#2c393939">
+    app:cardBackgroundColor="#212121">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/txtTituloQuadro"
@@ -17,16 +18,18 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="11dp"
+            android:layout_marginBottom="20dp"
             android:text="TextView" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/RecyclerViewBase"
             android:layout_width="match_parent"
-            android:layout_height="156dp"
+            android:layout_height="180dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="6dp" />
-    </RelativeLayout>
+    </LinearLayout>
 
 </android.support.design.card.MaterialCardView>

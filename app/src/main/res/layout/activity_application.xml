@@ -40,7 +40,8 @@
                 android:orientation="vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="300dp">
+                android:layout_marginTop="300dp"
+                android:id="@+id/linearlayout">
 
                 <com.sysdata.widget.accordion.FancyAccordionView
                     android:id="@+id/txtDescApp"
@@ -93,9 +94,14 @@
                     android:text="Data de lançamento: " />
 
 
+
             </LinearLayout>
 
-
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="32dp"
+                android:layout_gravity="center"/>
 
 
 
