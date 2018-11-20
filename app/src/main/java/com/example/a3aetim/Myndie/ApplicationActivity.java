@@ -20,6 +20,8 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.example.a3aetim.Myndie.Classes.Application;
+import com.example.a3aetim.Myndie.Classes.User;
+import com.example.a3aetim.Myndie.Classes.UserDAO;
 import com.example.a3aetim.Myndie.ViewHolder.CollapsedViewHolder;
 import com.example.a3aetim.Myndie.ViewHolder.ExpandableViewHolder;
 import com.sysdata.widget.accordion.ExpandableItemHolder;
@@ -30,6 +32,7 @@ import com.sysdata.widget.accordion.ItemAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ApplicationActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
     TextView mTitle,mPrice,mVersion, mPublisherName, mReleaseDate;
