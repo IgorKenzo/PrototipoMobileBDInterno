@@ -17,27 +17,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.a3aetim.Myndie.Adapters.ApplicationAdapter;
 import com.example.a3aetim.Myndie.Adapters.BackAppAdapter;
+import com.example.a3aetim.Myndie.Adapters.GenreAdapter;
 import com.example.a3aetim.Myndie.ApplicationActivity;
 import com.example.a3aetim.Myndie.Classes.Application;
+import com.example.a3aetim.Myndie.Classes.Genre;
 import com.example.a3aetim.Myndie.R;
+import com.example.a3aetim.Myndie.SearchableActivity;
 import com.example.a3aetim.Myndie.helper.DatabaseHelper;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MarketFragment extends Fragment {
     private DatabaseHelper helper;
     private SQLiteDatabase db;
     private ArrayList<Application> app;
+    private ArrayList<Genre> genre;
     private ArrayList<String> fundoNew,fundoPromo,fundoAvaliation;
     private RecyclerView mRecyclerViewNew,mRecyclerViewPromo,mRecyclerViewAvaliation;
     private ApplicationAdapter mRVAdapter;
     private BackAppAdapter mBackAdapterNew,mBackAdapterPromo,mBackAdapterAvaliation;
     private RecyclerView.LayoutManager mRVLManagerNew,mRVLManagerPromo,mRVLManagerAvaliation,mRVLManagerFundoNew,mRVLManagerFundoPromo,mRVLManagerFundoAvaliation;
     private EditText mSearch;
+    RecyclerView genreRecyclerView;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,9 +64,13 @@ public class MarketFragment extends Fragment {
         ///
         mRecyclerViewAvaliation = view.findViewById(R.id.recyclerViewMarketAvaliation);
         mRecyclerViewAvaliation.setHasFixedSize(true);
+        ///
+        genreRecyclerView = view.findViewById(R.id.recyclerViewMarketGenre);
+        genreRecyclerView.setHasFixedSize(true);
         setmRecyclerViewNew();
         setmRecyclerViewPromo();
         setmRecyclerViewAvaliation();
+        setGenreMarket();
        /* mSearch = (EditText)view.findViewById(R.id.edtSearchMarket);
         mSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -88,6 +99,7 @@ public class MarketFragment extends Fragment {
         helper = new DatabaseHelper(getActivity());
         db = helper.getReadableDatabase();
         app = new ArrayList<>();
+        genre = new ArrayList<>();
         fundoNew = new ArrayList<String>();
         fundoNew.add(getResources().getString(R.string.market_base_new));
         fundoPromo = new ArrayList<String>();
@@ -156,6 +168,38 @@ public class MarketFragment extends Fragment {
                 startActivity(i,options.toBundle());
             }
         });
+    }
+    private void setGenreMarket(){
+        loadGenre();
+        GenreAdapter mGenredapter = new GenreAdapter(genre);
+        //Define quadro que fica atrás dos apps
+
+        genreRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+        genreRecyclerView.setAdapter(mGenredapter);
+
+        mGenredapter.setOnitemClickListener(new GenreAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view,int position) {
+                Intent i = new Intent(getContext(),SearchableActivity.class);
+                i.setAction(Intent.ACTION_SEARCH);
+                i.putExtra("Genre",genre.get(position));
+                startActivity(i);
+            }
+        });
+    }
+
+    private void loadGenre(){
+        Cursor cursorgen = db.rawQuery("SELECT _IdGenre, NameGen from Genre", null);
+        int idgen;
+        String namegen;
+        cursorgen.moveToFirst();
+        for (int j = 0; j < cursorgen.getCount(); j++) {
+            idgen = cursorgen.getInt(0);
+            namegen = cursorgen.getString(1);
+            genre.add(new Genre(idgen,namegen));
+            cursorgen.moveToNext();
+        }
+        cursorgen.close();
     }
 
     private void getApps(){

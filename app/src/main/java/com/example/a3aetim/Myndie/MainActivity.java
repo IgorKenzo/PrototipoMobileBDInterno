@@ -159,6 +159,8 @@ public class MainActivity extends AppCompatActivity
                     public void onClick(DialogInterface dialog, int which) {
                         // The 'which' argument contains the index position
                         // of the selected item
+                        Toast.makeText(MainActivity.this, "Selected"+which, Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
                     }})
                 .show();
     }

@@ -22,6 +22,7 @@ import android.widget.ImageView;
 
 import com.example.a3aetim.Myndie.Adapters.ApplicationAdapter;
 import com.example.a3aetim.Myndie.Classes.Application;
+import com.example.a3aetim.Myndie.Classes.Genre;
 import com.example.a3aetim.Myndie.helper.DatabaseHelper;
 
 import java.sql.Date;
@@ -66,22 +67,57 @@ public class SearchableActivity extends AppCompatActivity {
         searchHandler(getIntent());
         mRVAdapter = new ApplicationAdapter(app);
         mRecyclerView.setLayoutManager(mRVLManager);
-        mRecyclerView.setAdapter(mRVAdapter);
+            mRecyclerView.setAdapter(mRVAdapter);
 
-        mRVAdapter.setOnitemClickListener(new ApplicationAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view,int position) {
-                Intent i = new Intent(getApplicationContext(),ApplicationActivity.class);
-                i.putExtra("App",app.get(position));
-                ImageView mImgvApp = (ImageView)view.findViewById(R.id.imgvAppItemMarket);
-                //ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, Pair.<View, String>create(mImgvApp,"AppTransition"));
-                startActivity(i/*,options.toBundle()*/);
+            mRVAdapter.setOnitemClickListener(new ApplicationAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view,int position) {
+                    Intent i = new Intent(getApplicationContext(),ApplicationActivity.class);
+                    i.putExtra("App",app.get(position));
+                    ImageView mImgvApp = (ImageView)view.findViewById(R.id.imgvAppItemMarket);
+                    //ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, Pair.<View, String>create(mImgvApp,"AppTransition"));
+                    startActivity(i/*,options.toBundle()*/);
+                }
+            });
+        }
+
+        private void getApps(String queryNome){
+            Cursor cursorapp = db.rawQuery("SELECT _IdApp, NameApp, PriceApp,VersionApp, PublisherNameApp, ReleaseDateApp, DescApp from Application WHERE NameApp LIKE '%"+ queryNome+"%'", null);
+            int idapp;
+            String nameapp,version, publisher, desc;
+            double preco;
+            String releasedate;
+            cursorapp.moveToFirst();
+            for (int j = 0; j < cursorapp.getCount(); j++) {
+                idapp = cursorapp.getInt(0);
+                nameapp = cursorapp.getString(1);
+                preco = cursorapp.getDouble(2);
+                version = cursorapp.getString(3);
+                publisher = cursorapp.getString(4);
+                releasedate = cursorapp.getString(5);
+                desc = cursorapp.getString(6);
+                app.add(new Application(idapp,nameapp,preco,version,desc,publisher,releasedate));
+                cursorapp.moveToNext();
             }
-        });
+            cursorapp.close();
+        }
+        public void searchHandler(Intent intent){
+            if(Intent.ACTION_SEARCH.toLowerCase().equalsIgnoreCase(intent.getAction().toLowerCase())){
+                if(intent.getSerializableExtra("Genre") != null){
+                    Genre g = (Genre) intent.getSerializableExtra("Genre");
+                    toolbar.setTitle(g.getName());
+                    getAppsByGenre(g.get_IdGenre());
+                }
+                else{
+                    String query = intent.getStringExtra(SearchManager.QUERY);
+                    toolbar.setTitle(query);
+                    getApps(query);
+                }
+        }
     }
 
-    private void getApps(String queryNome){
-        Cursor cursorapp = db.rawQuery("SELECT _IdApp, NameApp, PriceApp,VersionApp, PublisherNameApp, ReleaseDateApp, DescApp from Application WHERE NameApp LIKE '%"+ queryNome+"%'", null);
+    private void getAppsByGenre(int idGenre) {
+        Cursor cursorapp = db.rawQuery("SELECT _IdApp, NameApp, PriceApp,VersionApp, PublisherNameApp, ReleaseDateApp, DescApp from Application INNER JOIN ApplicationGenre on Application._IdApp = ApplicationGenre._IdApp_FK WHERE Application._IdApp = ApplicationGenre._IdApp_FK AND _IdGen_FK ="+idGenre, null);
         int idapp;
         String nameapp,version, publisher, desc;
         double preco;
@@ -99,13 +135,6 @@ public class SearchableActivity extends AppCompatActivity {
             cursorapp.moveToNext();
         }
         cursorapp.close();
-    }
-    public void searchHandler(Intent intent){
-        if(Intent.ACTION_SEARCH.toLowerCase().equalsIgnoreCase(intent.getAction().toLowerCase())){
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            toolbar.setTitle(query);
-            getApps(query);
-        }
     }
 
     @Override

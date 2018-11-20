@@ -248,8 +248,48 @@ public class CadastroCli extends Activity implements AdapterView.OnItemSelectedL
         }
         if(res != -1){
             Toasty.success(this, "Cadastrado com sucesso!", LENGTH_SHORT,false).show();
+            CadGenre();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+        }
+        else {
+            Toasty.error(this, "Um erro ocorreu!", LENGTH_SHORT,false).show();
+        }
+    }
+
+    public void CadGenre(){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues values =  new ContentValues();
+
+        values.put("NameGen","Ação");
+        db.insert("Genre",null,values);
+        values.put("NameGen","Avenura");
+        db.insert("Genre",null,values);
+        values.put("NameGen","Estratégia");
+        db.insert("Genre",null,values);
+        values.put("NameGen","RPG");
+        db.insert("Genre",null,values);
+        values.put("NameGen","Esporte");
+        db.insert("Genre",null,values);
+        values.put("NameGen","Corrida");
+        db.insert("Genre",null,values);
+        values.put("NameGen","Simulação");
+        db.insert("Genre",null,values);
+        values.put("NameGen","RTS");
+        db.insert("Genre",null,values);
+        values.put("NameGen","Romance");
+        db.insert("Genre",null,values);
+        values.put("NameGen","FPS");
+        long res = db.insert("Genre",null,values);
+
+        ContentValues values2 =  new ContentValues();
+        for(int i = 0; i<10; i++) {
+            values2.put("_IdApp_FK",i+1 );
+            values2.put("_IdGen_FK", i+1);
+            db.insert("ApplicationGenre",null,values2);
+        }
+        if(res != -1){
+            Toasty.success(this, "Cadastrado com sucesso!", LENGTH_SHORT,false).show();
         }
         else {
             Toasty.error(this, "Um erro ocorreu!", LENGTH_SHORT,false).show();
