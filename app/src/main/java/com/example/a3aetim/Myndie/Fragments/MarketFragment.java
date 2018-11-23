@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +20,25 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.a3aetim.Myndie.Adapters.ApplicationAdapter;
 import com.example.a3aetim.Myndie.Adapters.BackAppAdapter;
 import com.example.a3aetim.Myndie.Adapters.GenreAdapter;
 import com.example.a3aetim.Myndie.ApplicationActivity;
 import com.example.a3aetim.Myndie.Classes.Application;
 import com.example.a3aetim.Myndie.Classes.Genre;
+import com.example.a3aetim.Myndie.Connection.AppConfig;
+import com.example.a3aetim.Myndie.Connection.AppController;
 import com.example.a3aetim.Myndie.R;
 import com.example.a3aetim.Myndie.SearchableActivity;
 import com.example.a3aetim.Myndie.helper.DatabaseHelper;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -115,23 +126,23 @@ public class MarketFragment extends Fragment {
     }
     private void setmRecyclerViewNew(){
         load();
-        getApps();
-        mRVAdapter = new ApplicationAdapter(app);
-        mBackAdapterNew = new BackAppAdapter(fundoNew,mRVAdapter,mRVLManagerNew);
-        //Define quadro que fica atrás dos apps
-        mRecyclerViewNew.setLayoutManager(mRVLManagerFundoNew);
-        mRecyclerViewNew.setAdapter(mBackAdapterNew);
+        getAllApps();
+            mRVAdapter = new ApplicationAdapter(app);
+            mBackAdapterNew = new BackAppAdapter(fundoNew,mRVAdapter,mRVLManagerNew);
+            //Define quadro que fica atrás dos apps
+            mRecyclerViewNew.setLayoutManager(mRVLManagerFundoNew);
+            mRecyclerViewNew.setAdapter(mBackAdapterNew);
 
-        mRVAdapter.setOnitemClickListener(new ApplicationAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view,int position) {
-                Intent i = new Intent(getContext(),ApplicationActivity.class);
-                i.putExtra("App",app.get(position));
-                ImageView mImgvApp = (ImageView)view.findViewById(R.id.imgvAppItemMarket);
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), Pair.<View, String>create(mImgvApp,"AppTransition"));
-                startActivity(i,options.toBundle());
-            }
-        });
+            mRVAdapter.setOnitemClickListener(new ApplicationAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view,int position) {
+                    Intent i = new Intent(getContext(),ApplicationActivity.class);
+                    i.putExtra("App",app.get(position));
+                    ImageView mImgvApp = (ImageView)view.findViewById(R.id.imgvAppItemMarket);
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), Pair.<View, String>create(mImgvApp,"AppTransition"));
+                    startActivity(i,options.toBundle());
+                }
+            });
     }
     private void setmRecyclerViewPromo(){
         mRVAdapter = new ApplicationAdapter(app);
@@ -221,6 +232,73 @@ public class MarketFragment extends Fragment {
             cursorapp.moveToNext();
         }
         cursorapp.close();
+    }
+
+    private void getAllApps() {
+        // Tag used to cancel the request
+        String tag_string_req = "req_login";
+
+
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_ListaApps, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONArray listaAplicativosResponse = new JSONArray(response);
+                    //JSONArray appJSONArray = jsonObjectApp.getJSONArray("app");
+                    //JSONObject jApp;
+
+                    //boolean error = jsonObjectApp.getBoolean("error");
+
+                    // Check for error node in json
+                        // user successfully logged in
+                        // Create login session
+                        // Now store the user in SQLite
+                        /*String uid = jObj.getString("Id");
+
+                        JSONObject user = jObj.getJSONObject("User");
+                        String username = user.getString("Username");
+
+                        AlertDialog d = new AlertDialog.Builder(MainActivity.this).setMessage(uid + username).show();*/
+
+                        //Toast.makeText(getApplicationContext(), uid + username, Toast.LENGTH_LONG).show();
+                        for (int i = 0; i < listaAplicativosResponse.length(); i++) {
+                            JSONObject jsonObjectApp = new JSONObject(listaAplicativosResponse.getString(i));
+                            int idapp = Integer.parseInt(jsonObjectApp.getString("Id"));
+                            String title = jsonObjectApp.getString("Name");
+                            String desc = jsonObjectApp.getString("Desc");
+                            String version = jsonObjectApp.getString("Version");
+                            double price = Double.parseDouble(jsonObjectApp.getString("Price"));
+                            String publisher = jsonObjectApp.getString("PublisherName");
+                            String releasedate = jsonObjectApp.getString("releasedate");
+                            Application objetoApp = new Application(idapp, title, price, version, desc, publisher, releasedate);
+                            app.add(objetoApp);
+                        }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+
+
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     @Override

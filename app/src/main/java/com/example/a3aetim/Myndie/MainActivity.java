@@ -162,91 +162,10 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if(id==R.id.filter_apps){
-            checkLogin();
         }
         return super.onOptionsItemSelected(item);
     }
-    private void checkLogin() {
-        // Tag used to cancel the request
-        String tag_string_req = "req_login";
 
-        Toast.makeText(this, "Logging.... ", Toast.LENGTH_SHORT).show();
-
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_ListaApps, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "Login Response: " + response.toString());
-                ArrayList<Application> app = new ArrayList<>();
-
-                try {
-                    JSONArray listaAplicativosResponse = new JSONArray(response);
-                    JSONObject jsonObjectApp =  listaAplicativosResponse.getJSONObject(2);
-                    JSONArray appJSONArray = jsonObjectApp.getJSONArray("app");
-                    JSONObject jApp;
-
-                    boolean error = jsonObjectApp.getBoolean("error");
-
-                    // Check for error node in json
-                    if (!error) {
-                        // user successfully logged in
-                        // Create login session
-                        // Now store the user in SQLite
-                        /*String uid = jObj.getString("Id");
-
-                        JSONObject user = jObj.getJSONObject("User");
-                        String username = user.getString("Username");
-
-                        AlertDialog d = new AlertDialog.Builder(MainActivity.this).setMessage(uid + username).show();*/
-
-                        //Toast.makeText(getApplicationContext(), uid + username, Toast.LENGTH_LONG).show();
-                        for (int i = 0; i < appJSONArray.length(); i++) {
-                            jApp = new JSONObject(appJSONArray.getString(i));
-
-                            Log.i("DEVMEDIA", "nome=" + jApp.getString("username"));
-
-                            Application objetoApp = new Application();
-                            objetoApp.setTitle(jApp.getString("Name"));
-                            //objetoTrend.url = trend.getString("url");
-
-                            app.add(objetoApp);
-                        }
-                        for (int i = 0; i < app.size(); i++) {
-                            Toast.makeText(getApplicationContext(), app.get(i).toString(), Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        // Error in login. Get the error message
-                        String errorMsg = jsonObjectApp.getString("error_msg");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    // JSON error
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-
-
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Login Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        }) {
-
-
-
-        };
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
