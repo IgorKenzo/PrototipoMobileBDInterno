@@ -41,12 +41,14 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.a3aetim.Myndie.Classes.Application;
 import com.example.a3aetim.Myndie.Classes.ImageDAO;
 import com.example.a3aetim.Myndie.Classes.User;
 import com.example.a3aetim.Myndie.Connection.AppConfig;
 import com.example.a3aetim.Myndie.Connection.AppController;
 import com.example.a3aetim.Myndie.Fragments.*;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -160,44 +162,62 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if(id==R.id.filter_apps){
-            checkLogin("ll@gmail.com","12345");
+            checkLogin();
         }
         return super.onOptionsItemSelected(item);
     }
-    private void checkLogin(final String email, final String password) {
+    private void checkLogin() {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
 
         Toast.makeText(this, "Logging.... ", Toast.LENGTH_SHORT).show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_LOGIN, new Response.Listener<String>() {
+                AppConfig.URL_ListaApps, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Login Response: " + response.toString());
-
+                ArrayList<Application> app = new ArrayList<>();
 
                 try {
-                    JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
+                    JSONArray listaAplicativosResponse = new JSONArray(response);
+                    JSONObject jsonObjectApp =  listaAplicativosResponse.getJSONObject(2);
+                    JSONArray appJSONArray = jsonObjectApp.getJSONArray("app");
+                    JSONObject jApp;
+
+                    boolean error = jsonObjectApp.getBoolean("error");
 
                     // Check for error node in json
                     if (!error) {
                         // user successfully logged in
                         // Create login session
                         // Now store the user in SQLite
-                        String uid = jObj.getString("Id");
+                        /*String uid = jObj.getString("Id");
 
                         JSONObject user = jObj.getJSONObject("User");
                         String username = user.getString("Username");
 
-                        AlertDialog d = new AlertDialog.Builder(MainActivity.this).setMessage(uid + username).show();
+                        AlertDialog d = new AlertDialog.Builder(MainActivity.this).setMessage(uid + username).show();*/
 
                         //Toast.makeText(getApplicationContext(), uid + username, Toast.LENGTH_LONG).show();
+                        for (int i = 0; i < appJSONArray.length(); i++) {
+                            jApp = new JSONObject(appJSONArray.getString(i));
+
+                            Log.i("DEVMEDIA", "nome=" + jApp.getString("username"));
+
+                            Application objetoApp = new Application();
+                            objetoApp.setTitle(jApp.getString("Name"));
+                            //objetoTrend.url = trend.getString("url");
+
+                            app.add(objetoApp);
+                        }
+                        for (int i = 0; i < app.size(); i++) {
+                            Toast.makeText(getApplicationContext(), app.get(i).toString(), Toast.LENGTH_LONG).show();
+                        }
                     } else {
                         // Error in login. Get the error message
-                        String errorMsg = jObj.getString("error_msg");
+                        String errorMsg = jsonObjectApp.getString("error_msg");
                         Toast.makeText(getApplicationContext(),
                                 errorMsg, Toast.LENGTH_LONG).show();
                     }
@@ -220,21 +240,14 @@ public class MainActivity extends AppCompatActivity
             }
         }) {
 
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("email", email);
-                params.put("password", password);
 
-                return params;
-            }
 
         };
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

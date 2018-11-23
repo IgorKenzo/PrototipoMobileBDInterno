@@ -16,6 +16,9 @@ public class Application extends Item implements Serializable{
     private String PublisherName;
     private String ReleaseDate;
 
+    public Application() {
+    }
+
     public Application(int id, String title, double preco, String ver, String desc, String publisher, String releasedate){
         _IdApp = id;
         Title = title;
@@ -63,5 +66,33 @@ public class Application extends Item implements Serializable{
     @Override
     public int getUniqueId() {
         return get_IdApp();
+    }
+
+    public void set_IdApp(int _IdApp) {
+        this._IdApp = _IdApp;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public void setPrice(double price) {
+        Price = price;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public void setVersion(String version) {
+        Version = version;
+    }
+
+    public void setPublisherName(String publisherName) {
+        PublisherName = publisherName;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        ReleaseDate = releaseDate;
     }
 }
