@@ -18,6 +18,7 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.MenuItemCompat;
 import android.transition.ChangeBounds;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -36,12 +37,23 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.a3aetim.Myndie.Classes.ImageDAO;
 import com.example.a3aetim.Myndie.Classes.User;
+import com.example.a3aetim.Myndie.Connection.AppConfig;
+import com.example.a3aetim.Myndie.Connection.AppController;
 import com.example.a3aetim.Myndie.Fragments.*;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import static com.example.a3aetim.Myndie.Splash.PREF_NAME;
 
@@ -51,6 +63,7 @@ public class MainActivity extends AppCompatActivity
     User loggedUser;
     NavigationView navigationView;
     Bitmap img;
+    public static final String TAG = AppController.class.getName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         loadLocale();
@@ -147,22 +160,80 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if(id==R.id.filter_apps){
-            callFilterAlert();
+            checkLogin("ll@gmail.com","12345");
         }
         return super.onOptionsItemSelected(item);
     }
-    private void callFilterAlert() {
-        String[] cat = new String[]{"-Nenhuma-","Jogos","Utilitários"};
-        new AlertDialog.Builder(this,R.style.CustomAlertDialog)
-                .setTitle("Escolha uma categoria")
-                .setSingleChoiceItems(cat,0, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // The 'which' argument contains the index position
-                        // of the selected item
-                        Toast.makeText(MainActivity.this, "Selected"+which, Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }})
-                .show();
+    private void checkLogin(final String email, final String password) {
+        // Tag used to cancel the request
+        String tag_string_req = "req_login";
+
+        Toast.makeText(this, "Logging.... ", Toast.LENGTH_SHORT).show();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_LOGIN, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Login Response: " + response.toString());
+
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+
+                    // Check for error node in json
+                    if (!error) {
+                        // user successfully logged in
+                        // Create login session
+                        // Now store the user in SQLite
+                        String uid = jObj.getString("Id");
+
+                        JSONObject user = jObj.getJSONObject("User");
+                        String username = user.getString("Username");
+
+                        AlertDialog d = new AlertDialog.Builder(MainActivity.this).setMessage(uid + username).show();
+
+                        //Toast.makeText(getApplicationContext(), uid + username, Toast.LENGTH_LONG).show();
+                    } else {
+                        // Error in login. Get the error message
+                        String errorMsg = jObj.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Login Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", email);
+                params.put("password", password);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
