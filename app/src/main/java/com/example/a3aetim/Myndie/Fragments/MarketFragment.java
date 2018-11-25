@@ -1,5 +1,7 @@
 package com.example.a3aetim.Myndie.Fragments;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,6 +26,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.a3aetim.Myndie.Adapters.ApplicationAdapter;
 import com.example.a3aetim.Myndie.Adapters.BackAppAdapter;
 import com.example.a3aetim.Myndie.Adapters.GenreAdapter;
@@ -43,7 +46,10 @@ import org.json.JSONObject;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
+
+@SuppressLint("ValidFragment")
 public class MarketFragment extends Fragment {
     private DatabaseHelper helper;
     private SQLiteDatabase db;
@@ -54,8 +60,12 @@ public class MarketFragment extends Fragment {
     private ApplicationAdapter mRVAdapter;
     private BackAppAdapter mBackAdapterNew,mBackAdapterPromo,mBackAdapterAvaliation;
     private RecyclerView.LayoutManager mRVLManagerNew,mRVLManagerPromo,mRVLManagerAvaliation,mRVLManagerFundoNew,mRVLManagerFundoPromo,mRVLManagerFundoAvaliation;
-    private EditText mSearch;
     RecyclerView genreRecyclerView;
+
+    public MarketFragment(ArrayList arrayList){
+        app = arrayList;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,23 +92,6 @@ public class MarketFragment extends Fragment {
         setmRecyclerViewPromo();
         setmRecyclerViewAvaliation();
         setGenreMarket();
-       /* mSearch = (EditText)view.findViewById(R.id.edtSearchMarket);
-        mSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mBackAdapterNew.setAppFilter(s);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });*/
         return view;
     }
     @Override
@@ -109,7 +102,6 @@ public class MarketFragment extends Fragment {
     private void load(){
         helper = new DatabaseHelper(getActivity());
         db = helper.getReadableDatabase();
-        app = new ArrayList<>();
         genre = new ArrayList<>();
         fundoNew = new ArrayList<String>();
         fundoNew.add(getResources().getString(R.string.market_base_new));
@@ -126,23 +118,22 @@ public class MarketFragment extends Fragment {
     }
     private void setmRecyclerViewNew(){
         load();
-        getAllApps();
-            mRVAdapter = new ApplicationAdapter(app);
-            mBackAdapterNew = new BackAppAdapter(fundoNew,mRVAdapter,mRVLManagerNew);
-            //Define quadro que fica atrás dos apps
-            mRecyclerViewNew.setLayoutManager(mRVLManagerFundoNew);
-            mRecyclerViewNew.setAdapter(mBackAdapterNew);
+        mRVAdapter = new ApplicationAdapter(app);
+        mBackAdapterNew = new BackAppAdapter(fundoNew,mRVAdapter,mRVLManagerNew);
+        //Define quadro que fica atrás dos apps
+        mRecyclerViewNew.setLayoutManager(mRVLManagerFundoNew);
+        mRecyclerViewNew.setAdapter(mBackAdapterNew);
 
-            mRVAdapter.setOnitemClickListener(new ApplicationAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(View view,int position) {
-                    Intent i = new Intent(getContext(),ApplicationActivity.class);
-                    i.putExtra("App",app.get(position));
-                    ImageView mImgvApp = (ImageView)view.findViewById(R.id.imgvAppItemMarket);
-                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), Pair.<View, String>create(mImgvApp,"AppTransition"));
-                    startActivity(i,options.toBundle());
-                }
-            });
+        mRVAdapter.setOnitemClickListener(new ApplicationAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view,int position) {
+                Intent i = new Intent(getContext(),ApplicationActivity.class);
+                i.putExtra("App",app.get(position));
+                ImageView mImgvApp = (ImageView)view.findViewById(R.id.imgvAppItemMarket);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), Pair.<View, String>create(mImgvApp,"AppTransition"));
+                startActivity(i,options.toBundle());
+            }
+        });
     }
     private void setmRecyclerViewPromo(){
         mRVAdapter = new ApplicationAdapter(app);
@@ -213,93 +204,8 @@ public class MarketFragment extends Fragment {
         cursorgen.close();
     }
 
-    private void getApps(){
-        Cursor cursorapp = db.rawQuery("SELECT _IdApp, NameApp, PriceApp,VersionApp, PublisherNameApp, ReleaseDateApp, DescApp from Application", null);
-        int idapp;
-        String nameapp,version, publisher, desc;
-        double preco;
-        String releasedate;
-        cursorapp.moveToFirst();
-        for (int j = 0; j < cursorapp.getCount(); j++) {
-            idapp = cursorapp.getInt(0);
-            nameapp = cursorapp.getString(1);
-            preco = cursorapp.getDouble(2);
-            version = cursorapp.getString(3);
-            publisher = cursorapp.getString(4);
-            releasedate = cursorapp.getString(5);
-            desc = cursorapp.getString(6);
-            app.add(new Application(idapp,nameapp,preco,version,desc,publisher,releasedate));
-            cursorapp.moveToNext();
-        }
-        cursorapp.close();
-    }
-
-    private void getAllApps() {
-        // Tag used to cancel the request
-        String tag_string_req = "req_login";
 
 
-
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_ListaApps, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-
-                try {
-                    JSONArray listaAplicativosResponse = new JSONArray(response);
-                    //JSONArray appJSONArray = jsonObjectApp.getJSONArray("app");
-                    //JSONObject jApp;
-
-                    //boolean error = jsonObjectApp.getBoolean("error");
-
-                    // Check for error node in json
-                        // user successfully logged in
-                        // Create login session
-                        // Now store the user in SQLite
-                        /*String uid = jObj.getString("Id");
-
-                        JSONObject user = jObj.getJSONObject("User");
-                        String username = user.getString("Username");
-
-                        AlertDialog d = new AlertDialog.Builder(MainActivity.this).setMessage(uid + username).show();*/
-
-                        //Toast.makeText(getApplicationContext(), uid + username, Toast.LENGTH_LONG).show();
-                        for (int i = 0; i < listaAplicativosResponse.length(); i++) {
-                            JSONObject jsonObjectApp = new JSONObject(listaAplicativosResponse.getString(i));
-                            int idapp = Integer.parseInt(jsonObjectApp.getString("Id"));
-                            String title = jsonObjectApp.getString("Name");
-                            String desc = jsonObjectApp.getString("Desc");
-                            String version = jsonObjectApp.getString("Version");
-                            double price = Double.parseDouble(jsonObjectApp.getString("Price"));
-                            String publisher = jsonObjectApp.getString("PublisherName");
-                            String releasedate = jsonObjectApp.getString("releasedate");
-                            Application objetoApp = new Application(idapp, title, price, version, desc, publisher, releasedate);
-                            app.add(objetoApp);
-                        }
-                } catch (JSONException e) {
-                    // JSON error
-                    e.printStackTrace();
-
-                }
-
-            }
-        }, new Response.ErrorListener() {
-
-
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        }) {
-
-
-
-        };
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-    }
 
     @Override
     public void onDestroy(){

@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity
     User loggedUser;
     NavigationView navigationView;
     Bitmap img;
+    ArrayList<Application> app;
     public static final String TAG = AppController.class.getName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,10 +74,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if(savedInstanceState == null) {
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.add(R.id.frameContentMain, new MarketFragment());
-            ft.commit();
+            app = new ArrayList<>();
+            getAllApps();
         }
 
         loggedUser = (User) getIntent().getSerializableExtra("LoggedUser");
@@ -109,7 +108,14 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-      setLoggedUser();
+        setLoggedUser();
+    }
+
+    private void openMarket() {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.frameContentMain, new MarketFragment(app));
+        ft.commit();
     }
 
     @Override
@@ -162,10 +168,10 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if(id==R.id.filter_apps){
+            getAllApps();
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -177,7 +183,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_Market) {
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.frameContentMain, new MarketFragment());
+            ft.replace(R.id.frameContentMain, new MarketFragment(app));
             ft.commit();
         } else if (id == R.id.nav_Avaliation) {
             FragmentManager fm = getSupportFragmentManager();
@@ -243,5 +249,67 @@ public class MainActivity extends AppCompatActivity
             startActivity(getIntent());
             overridePendingTransition(0, 0);
         }
+    }
+
+    private void getAllApps() {
+        final ArrayList arrayList = new ArrayList();
+        // Tag used to cancel the request
+        StringRequest strReq = new StringRequest(Request.Method.GET,
+                AppConfig.URL_ListaApps, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONArray listaAplicativosResponse = new JSONArray(response);
+                    //JSONArray appJSONArray = jsonObjectApp.getJSONArray("app");
+                    //JSONObject jApp;
+
+                    //boolean error = jsonObjectApp.getBoolean("error");
+
+                    // Check for error node in json
+                    // user successfully logged in
+                    // Create login session
+                    // Now store the user in SQLite
+                        /*String uid = jObj.getString("Id");
+
+                        JSONObject user = jObj.getJSONObject("User");
+                        String username = user.getString("Username");
+
+                        AlertDialog d = new AlertDialog.Builder(MainActivity.this).setMessage(uid + username).show();*/
+
+                    //Toast.makeText(getApplicationContext(), uid + username, Toast.LENGTH_LONG).show();
+                    for (int i = 0; i < listaAplicativosResponse.length(); i++) {
+                        JSONObject jsonObjectApp = listaAplicativosResponse.getJSONObject(i);
+                        int idapp = Integer.parseInt(jsonObjectApp.getString("Id"));
+                        String title = jsonObjectApp.getString("Name");
+                        String desc = jsonObjectApp.getString("Desc");
+                        String version = jsonObjectApp.getString("Version");
+                        double price = Double.parseDouble(jsonObjectApp.getString("Price"));
+                        String publisher = jsonObjectApp.getString("PublisherName");
+                        String releasedate = jsonObjectApp.getString("releasedate");
+                        Application objetoApp = new Application(idapp, title, price, version, desc, publisher, releasedate);
+                        arrayList.add(objetoApp);
+                    }
+                    app.addAll(arrayList);
+                    openMarket();
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq);
     }
 }
