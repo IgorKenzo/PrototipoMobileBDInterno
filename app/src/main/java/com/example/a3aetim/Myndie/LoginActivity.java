@@ -240,7 +240,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             chkEmail = email;
             helper.close();
             return true;
-        }
+    }
         else{helper.close();return false;}
     }
     private boolean isPasswordValid(String password) {
